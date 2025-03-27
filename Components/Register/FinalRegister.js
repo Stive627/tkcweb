@@ -2,10 +2,13 @@
 import fetchLink from '@/Functions/fetchLink'
 import Image from 'next/image'
 import React, { useState } from 'react'
+import TkcInput from '../TkcInput'
 import { useScreen } from '@/Hooks/useScreen'
+import Link from 'next/link'
 import RegistrationForm from './RegistrationForm'
+import FinalRegistration from './FinalRegistration'
 
-function Register() {
+function FInalRegister() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [repassword, setRePassword] = useState('')
@@ -20,10 +23,10 @@ function Register() {
             </div>
         </div>
         <p className=' font-semibold text-[20px] text-center pt-7 pb-2.5'>Register to continue</p>
-        <RegistrationForm username={username} password={password} repassword={repassword} setPassword={setPassword} setRePassword={setRePassword} setUsername={setUsername}/>
-        </div>
+            <FinalRegistration password={password} repassword={repassword} username={username} handlePassword={setPassword} handleSetpassword={setRePassword} handleUsername={setUsername}/>
+     </div>
     </div>
   )
 }
 
-export default Register
+export default FInalRegister
