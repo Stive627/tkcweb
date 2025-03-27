@@ -11,5 +11,5 @@ export function useScreen(){
         window.addEventListener('resize', handleWidth)
         return () => window.removeEventListener('resize', handleWidth)
     },[width])
-    return width > 450
+    return width > 650
 }
