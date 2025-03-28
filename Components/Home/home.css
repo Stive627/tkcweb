@@ -1,12 +1,25 @@
-.horrizontalScroll{
-    animation: horrizontalAnimation 5s linear forwards;
+.scrollgo{
+    animation: scrollgoAnimation 400ms linear forwards;
 }
 
-@keyframes horrizontalAnimation {
+.scrollback{
+    animation: scrollbackAnimation 400ms linear forwards;
+}
+
+@keyframes scrollgoAnimation {
     from {
         transform: translateX(0);
       }
       to {
+        transform: translateX(145px);
+      }
+}
+
+@keyframes scrollbackAnimation {
+    from {
         transform: translateX(100px);
+      }
+      to {
+        transform: translateX(0);
       }
 }

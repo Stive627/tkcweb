@@ -7,7 +7,7 @@ import './home.css'
 import { useScreen } from '@/Hooks/useScreen';
 
 function HOmeTKC() {
-  const [section, setSection] = useState(0)
+  const [section, setSection] = useState(undefined)
   const large = useScreen()
   return (
     <div className=' w-screen flex justify-center '>
@@ -27,12 +27,13 @@ function HOmeTKC() {
         <div className=' flex justify-center mt-18'>
           <div className=' w-3/4'>
             <div className=' flex flex-row gap-10'>
-              <button onClick={() => setSection(section === 0 ? section : 1)} className=' border-none text-[16px]'>Snippets & tips</button>
-              <button onClick={() => setSection(section === 1 ? section : 0)} className='border-none text-[16px]'>Projects</button>
+              <button onClick={() =>{if(section === 0){return;} setSection(0)}} className=' border-none text-[16px] cursor-pointer'>Snippets & tips</button>
+              <button onClick={() =>{if(section === 1){return;} setSection(1)}} className='border-none text-[16px] cursor-pointer'>Projects</button>
             </div>
-            <hr className={`w-27 ${section === 0 &&'scrollgo'} ${section === 1 &&'scrollback'}`}/>
+            <hr className={`${section === 1 ? 'w-16' : 'w-27'} ${section === 1 && 'scrollgo'} ${section === 0 && 'scrollback'}`}/>
           </div>
         </div>
+        <div className=' mt-4  h-96 flex justify-center items-center'><p>No content. Click here to <span style={{color:'rgba(2, 72, 200, 1)'}}>add</span></p></div>
       </div>
     </div>
   )
