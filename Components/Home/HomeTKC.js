@@ -11,11 +11,11 @@ function HOmeTKC() {
   const large = useScreen()
   return (
     <div className=' w-screen flex justify-center '>
-      <div className={`${large && 'w-1/2'}  mt-5 h-full`}>
-        <div className={`flex flex-row ${large?'justify-between':'gap-5'}`}>
+      <div className={`${large ? 'w-1/2': 'w-full pr-2.5'}  mt-5 h-full`}>
+        <div className={`flex flex-row justify-between`}>
           <div className=' flex flex-row  items-center'>
               <Image src={fetchLink('logo.png')} width={80} height={80} alt='logo tkc'/>
-              <p className={`font-semibold ${large ? 'text-[20px]':'text-[15px]'}`}>TSA Knowledge Center</p>
+              <p className={`font-semibold ${large ? 'text-[20px]':'text-[17px]'}`}>TSA Knowledge Center</p>
           </div>
           <div className=' flex flex-row gap-2 items-center'>
             <NotificationsNoneIcon sx={{fontSize:large? 35 : 25}}/>
