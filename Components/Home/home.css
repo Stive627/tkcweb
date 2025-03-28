@@ -1,0 +1,12 @@
+.horrizontalScroll{
+    animation: horrizontalAnimation 5s linear forwards;
+}
+
+@keyframes horrizontalAnimation {
+    from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(100px);
+      }
+}
