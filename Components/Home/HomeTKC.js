@@ -15,11 +15,11 @@ function HOmeTKC() {
         <div className={`flex flex-row ${large?'justify-between':'gap-5'}`}>
           <div className=' flex flex-row  items-center'>
               <Image src={fetchLink('logo.png')} width={80} height={80} alt='logo tkc'/>
-              <p className=' font-semibold text-[20px]'>TSA Knowledge Center</p>
+              <p className={`font-semibold ${large ? 'text-[20px]':'text-[15px]'}`}>TSA Knowledge Center</p>
           </div>
           <div className=' flex flex-row gap-2 items-center'>
-            <NotificationsNoneIcon sx={{fontSize:35}}/>
-            <div className=' w-9 h-9 flex items-center justify-center border rounded-full' style={{borderColor:'rgba(0, 0, 0, 0.4)'}}>
+            <NotificationsNoneIcon sx={{fontSize:large? 35 : 25}}/>
+            <div className={`${large? 'w-9 h-9':'w-8 h-8'} flex items-center justify-center border rounded-full`} style={{borderColor:'rgba(0, 0, 0, 0.4)'}}>
               <p>S</p>
             </div>
           </div>
