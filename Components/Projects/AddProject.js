@@ -26,7 +26,7 @@ function AddProject({domain, title, setTitle, description, setDescription, image
                             {
                                 imagefiles.map((elt, indx) => (
                                     <div key={indx} className = 'flex justify-center border py-1 relative' style={{borderStyle:'dashed', borderColor:'rgba(0, 0, 0, 0.3)'}}>
-                                        <button  onClick={()=> handleDeleteImage()} className=' w-7 h-7  absolute right-5 rounded-full text-white' style={{backgroundColor:'rgba(0, 0, 0, 0.78)'}}><CloseIcon/></button>
+                                        <button  onClick={()=> handleDeleteImage(indx)} className=' w-7 h-7  absolute right-5 rounded-full text-white' style={{backgroundColor:'rgba(0, 0, 0, 0.78)'}}><CloseIcon/></button>
                                         <Image  src={URL.createObjectURL(elt[0])} width={100} height={100} alt='tips images'/> 
                                         <p className=' absolute bottom-0 right-0'>{elt[0].name}</p>
                                     </div>

@@ -12,6 +12,11 @@ import AddProject from './AddProject';
         const [description, setDescription] = useState('')
         const [imagefiles, setImageFiles] = useState([])
         const large = useScreen()
+        function handleDeleteImage(indx){
+            const indexedImg = imagefiles[indx]
+            const newImgs = imagefiles.filter(img => img !== indexedImg)
+            setImageFiles(newImgs)
+        }
         if(project?.length === 0 || !project){
             return (
                 <div className={`mt-4 ${!large && 'ml-2'}`}>
@@ -23,10 +28,10 @@ import AddProject from './AddProject';
                                 </div>
                             </div>
                             <div style={{backgroundColor:'rgba(2, 72, 200, 0.21)'}} className=' h-full w-1'></div>
-                            <div className=' grow w-full h-96  flex justify-center items-end'>
+                            <div className=' grow w-full h-96  flex justify-center '>
                                 <div>
                                     { 
-                                    addProject ? <AddProject  title={title} description={description} setTitle={setTitle} setDescription={setDescription} imagefiles={imagefiles} setImageFiles={setImageFiles} domain={'UI/UX'}/> :
+                                    addProject ? <AddProject handlCancel={()=> setAddProject(false)} handleDeleteImage={handleDeleteImage} title={title} description={description} setTitle={setTitle} setDescription={setDescription} imagefiles={imagefiles} setImageFiles={setImageFiles} domain={'UI/UX'}/> :
                                     <>
                                         <div className=' flex justify-center '><Image src={fetchLink('eproject.png')}  width={200} height={200} alt='empty project'/></div>
                                         <p>No Snippets or tips. Click here to <span className=' underline cursor-pointer' onClick={()=>setAddProject(true)}  style={{color:'rgba(2, 72, 200, 1)'}}>add</span></p>
@@ -37,7 +42,7 @@ import AddProject from './AddProject';
                         </div>:
                         <div>
                             { 
-                            addProject ? <AddProject  title={title} description={description} setTitle={setTitle} setDescription={setDescription} imagefiles={imagefiles} setImageFiles={setImageFiles} domain={'UI/UX'}/> :
+                            addProject ? <AddProject handlCancel={()=> setAddProject(false)} handleDeleteImage={handleDeleteImage}  title={title} description={description} setTitle={setTitle} setDescription={setDescription} imagefiles={imagefiles} setImageFiles={setImageFiles} domain={'UI/UX'}/> :
                                 <> 
                                     <p className=' px-3  mt-8 text-blue-700 text-[16px]'><AddCircleOutlineRoundedIcon style={{fontWeight:'bold', }} sx={{fontSize:30}}/> Add New project</p>
                                     <div className=' flex justify-center mt-15'><Image src={fetchLink('eproject.png')}  width={200} height={200} alt='empty project'/></div>
