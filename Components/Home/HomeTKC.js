@@ -6,6 +6,7 @@ import React, { useState } from 'react'
 import './home.css'
 import { useScreen } from '@/Hooks/useScreen';
 import Content from './Content';
+import CloseIcon from '@mui/icons-material/Close';
 
 function HOmeTKC() {
   const [section, setSection] = useState(undefined)

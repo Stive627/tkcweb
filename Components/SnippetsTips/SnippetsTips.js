@@ -14,7 +14,7 @@ function SnippetsTips() {
             <div className={`mt-4  h-96 flex justify-center items-center ${!large && 'ml-2'}`}>
                 { 
                 addtips?
-                    <AddContent handlCancel={()=>setAddtips(false)} title={title} description={description} imgfile={imgfile} setTitle={setTitle} setDescription={setDescription} setImgFile={setImgFile} domain={'UI/UX'}/>:
+                    <AddContent handleDeleteImage={() => setImgFile(undefined)} handlCancel={()=>setAddtips(false)} title={title} description={description} imgfile={imgfile} setTitle={setTitle} setDescription={setDescription} setImgFile={setImgFile} domain={'UI/UX'}/>:
                     <p>No Snippets or tips. Click here to <span className=' underline cursor-pointer' onClick={()=>setAddtips(true)}  style={{color:'rgba(2, 72, 200, 1)'}}>add</span></p>
                 }
         </div>

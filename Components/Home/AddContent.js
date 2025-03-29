@@ -4,9 +4,10 @@ import TkcInput from '../TkcInput'
 import TkcTextArea from '../TkcTexArea'
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import Image from 'next/image';
+import CloseIcon from '@mui/icons-material/Close';
 import { useScreen } from '@/Hooks/useScreen';
 
-function AddContent({domain, title, setTitle, description, setDescription, imgfile, setImgFile, handlCancel}) {
+function AddContent({domain, title, setTitle, description, setDescription, imgfile, setImgFile, handlCancel, handleDeleteImage}) {
     const large = useScreen()
     const validAdd = title && description
   return (
@@ -17,7 +18,8 @@ function AddContent({domain, title, setTitle, description, setDescription, imgfi
         </div>
         <TkcTextArea value={description} setvalue={setDescription} placeholder={'Add the description'}/>
         {
-            imgfile && <div className = 'flex justify-center border py-1' style={{borderStyle:'dashed', borderColor:'rgba(0, 0, 0, 0.3)'}}>
+            imgfile && <div className = 'flex justify-center border py-1 relative' style={{borderStyle:'dashed', borderColor:'rgba(0, 0, 0, 0.3)'}}>
+                           <button  onClick={()=> handleDeleteImage()} className=' w-7 h-7  absolute right-5 rounded-full text-white' style={{backgroundColor:'rgba(0, 0, 0, 0.78)'}}><CloseIcon/></button>
                            <Image src={URL.createObjectURL(imgfile[0])} width={100} height={100} alt='tips images'/> 
                         </div>
         }
