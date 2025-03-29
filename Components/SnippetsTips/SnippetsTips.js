@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import AddContent from '../Home/AddContent'
+import { useScreen } from '@/Hooks/useScreen'
 
 function SnippetsTips() {
     const [tips, setTips] = useState(undefined)
@@ -7,14 +8,15 @@ function SnippetsTips() {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [imgfile, setImgFile] = useState(undefined)
+    const large = useScreen()
   if(tips?.length === 0 || !tips){ 
     return (
-        <div className=' mt-4  h-96 flex justify-center items-center'>
-            { 
-            addtips?
-            <AddContent handlCancel={()=>setAddtips(false)} title={title} description={description} imgfile={imgfile} setTitle={setTitle} setDescription={setDescription} setImgFile={setImgFile} domain={'UI/UX'}/>:
-            <p>No Snippets or tips. Click here to <span className=' underline cursor-pointer' onClick={()=>setAddtips(true)}  style={{color:'rgba(2, 72, 200, 1)'}}>add</span></p>
-            }
+            <div className={`mt-4  h-96 flex justify-center items-center ${!large && 'ml-2'}`}>
+                { 
+                addtips?
+                    <AddContent handlCancel={()=>setAddtips(false)} title={title} description={description} imgfile={imgfile} setTitle={setTitle} setDescription={setDescription} setImgFile={setImgFile} domain={'UI/UX'}/>:
+                    <p>No Snippets or tips. Click here to <span className=' underline cursor-pointer' onClick={()=>setAddtips(true)}  style={{color:'rgba(2, 72, 200, 1)'}}>add</span></p>
+                }
         </div>
     )
  }
