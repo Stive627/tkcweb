@@ -5,6 +5,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import './home.css'
 import { useScreen } from '@/Hooks/useScreen';
+import Content from './Content';
 
 function HOmeTKC() {
   const [section, setSection] = useState(undefined)
@@ -33,7 +34,7 @@ function HOmeTKC() {
             <hr className={`${section === 1 ? 'w-16' : 'w-27'} ${section === 1 && 'scrollgo'} ${section === 0 && 'scrollback'}`}/>
           </div>
         </div>
-        <div className=' mt-4  h-96 flex justify-center items-center'><p>No content. Click here to <span style={{color:'rgba(2, 72, 200, 1)'}}>add</span></p></div>
+        <Content section={section}/>
       </div>
     </div>
   )
