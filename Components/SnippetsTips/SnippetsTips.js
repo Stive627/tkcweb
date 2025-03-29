@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import AddContent from '../Home/AddContent'
 import { useScreen } from '@/Hooks/useScreen'
+import Image from 'next/image'
+import fetchLink from '@/Functions/fetchLink'
 
 function SnippetsTips() {
     const [tips, setTips] = useState(undefined)
@@ -15,7 +17,10 @@ function SnippetsTips() {
                 { 
                 addtips?
                     <AddContent handleDeleteImage={() => setImgFile(undefined)} handlCancel={()=>setAddtips(false)} title={title} description={description} imgfile={imgfile} setTitle={setTitle} setDescription={setDescription} setImgFile={setImgFile} domain={'UI/UX'}/>:
-                    <p>No Snippets or tips. Click here to <span className=' underline cursor-pointer' onClick={()=>setAddtips(true)}  style={{color:'rgba(2, 72, 200, 1)'}}>add</span></p>
+                    <div>
+                        <div className=' flex justify-center'><Image src={fetchLink('esnippet.png')} width={250} height={250} alt='empty snippet'/></div>
+                        <p>No Snippets or tips. Click here to <span className=' underline cursor-pointer' onClick={()=>setAddtips(true)}  style={{color:'rgba(2, 72, 200, 1)'}}>add</span></p>
+                    </div>
                 }
         </div>
     )
