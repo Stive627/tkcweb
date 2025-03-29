@@ -20,12 +20,12 @@ function AddContent({domain, title, setTitle, description, setDescription, imgfi
         {
             imgfile && <div className = 'flex justify-center border py-1 relative' style={{borderStyle:'dashed', borderColor:'rgba(0, 0, 0, 0.3)'}}>
                            <button  onClick={()=> handleDeleteImage()} className=' w-7 h-7  absolute right-5 rounded-full text-white' style={{backgroundColor:'rgba(0, 0, 0, 0.78)'}}><CloseIcon/></button>
-                           <Image src={URL.createObjectURL(imgfile[0])} width={100} height={100} alt='tips images'/> 
+                           <Image  src={URL.createObjectURL(imgfile[0])} width={100} height={100} alt='tips images'/> 
                         </div>
         }
         <div className=' flex justify-between'>
             <div>
-                <input type='file' id='tipfile' className=' hidden'  onChange={(e)=>setImgFile(e.target.files)}/>
+                <input type='file' multiple id='tipfile' className=' hidden'  onChange={(e)=>{setImgFile(e.target.files); console.log('hi')}}/>
                 <label className={`${imgfile && 'hidden'}`}  htmlFor='tipfile'><AttachFileIcon className=' cursor-pointer' style={{color:'rgba(2, 72, 200, 1)'}}/></label>
             </div>
             <div className=' flex flex-row gap-2 text-[16px]'>

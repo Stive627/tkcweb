@@ -8,7 +8,9 @@ import React, {useState} from 'react'
                 <div className=' mt-4  h-96 flex justify-center items-center'>
                     { addProject ?
                     <></>:
-                    <p>No Project. Click here to <span className=' underline cursor-pointer' onClick={()=>setAddProject(true)} style={{color:'rgba(2, 72, 200, 1)'}}>add</span></p>
+                    <div >
+
+                    </div>
                     }
                 </div>
             )

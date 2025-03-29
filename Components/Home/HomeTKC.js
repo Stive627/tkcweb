@@ -6,18 +6,17 @@ import React, { useState } from 'react'
 import './home.css'
 import { useScreen } from '@/Hooks/useScreen';
 import Content from './Content';
-import CloseIcon from '@mui/icons-material/Close';
 
 function HOmeTKC() {
   const [section, setSection] = useState(undefined)
   const large = useScreen()
   return (
     <div className=' w-screen flex justify-center '>
-      <div className={`${large ? 'w-1/2': 'w-full pr-2.5'}  mt-5 h-full`}>
+      <div className={`${large ? 'w-1/2 mt-5': 'w-full pr-2.5 mt-2'}  h-full`}>
         <div className={`flex flex-row justify-between`}>
           <div className=' flex flex-row  items-center'>
               <Image src={fetchLink('logo.png')} width={80} height={80} alt='logo tkc'/>
-              <p className={`font-semibold ${large ? 'text-[20px]':'text-[17px]'}`}>TSA Knowledge Center</p>
+              <p className={`font-semibold ${large ? 'text-[20px]':'text-[17px] top-1'} relative right-1 `}>TSA Knowledge Center</p>
           </div>
           <div className=' flex flex-row gap-2 items-center'>
             <NotificationsNoneIcon sx={{fontSize:large? 35 : 25}}/>
@@ -26,7 +25,7 @@ function HOmeTKC() {
             </div>
           </div>
         </div>
-        <div className=' flex justify-center mt-18'>
+        <div className={`flex justify-center ${large? 'mt-12':'mt-10'}`}>
           <div className=' w-3/4'>
             <div className=' flex flex-row gap-10'>
               <button onClick={() =>{if(section === 0){return;} setSection(0)}} className=' border-none text-[16px] cursor-pointer'>Snippets & tips</button>
