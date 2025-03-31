@@ -1,0 +1,8 @@
+.show{
+    animation: showanimation 5s forwards;
+}
+@keyframes showanimation {
+    to{
+        display: block;
+    }
+}

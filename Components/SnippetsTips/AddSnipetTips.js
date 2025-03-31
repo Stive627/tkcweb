@@ -7,7 +7,7 @@ import Image from 'next/image';
 import CloseIcon from '@mui/icons-material/Close';
 import { useScreen } from '@/Hooks/useScreen';
 
-function AddSnippetTips({domain, title, setTitle, description, setDescription, imgfile, setImgFile, handlCancel, handleDeleteImage}) {
+function AddSnippetTips({domain, title, setTitle, description, setDescription, imgfile, setImgFile, handlCancel, handleDeleteImage, handleSubmit}) {
     const large = useScreen()
     const validAdd = title && description
   return (
@@ -31,7 +31,7 @@ function AddSnippetTips({domain, title, setTitle, description, setDescription, i
             </div>
             <div className=' flex flex-row gap-2 text-[16px]'>
                 <button onClick={()=>handlCancel()}  className=' border w-20 rounded-md py-1 cursor-pointer' style={{borderColor:'rgba(2, 72, 200, 1)', color:'rgba(2, 72, 200, 1)'}}>Cancel</button>
-                <button className='text-white border w-20 py-1 rounded-md cursor-pointer' style={{backgroundColor:validAdd?'rgba(2, 72, 200, 1)':'rgba(94, 140, 225, 1)', borderColor:'rgba(2, 72, 200, 0.54)'}} disabled={!validAdd}>Add</button>
+                <button onClick={() =>handleSubmit()} className='text-white border w-20 py-1 rounded-md cursor-pointer' style={{backgroundColor:validAdd?'rgba(2, 72, 200, 1)':'rgba(94, 140, 225, 1)', borderColor:'rgba(2, 72, 200, 0.54)'}} disabled={!validAdd}>Add</button>
             </div>
         </div>
       

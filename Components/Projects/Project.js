@@ -4,6 +4,7 @@ import Image from 'next/image'
 import React, {useState} from 'react'
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import AddProject from './AddProject';
+import axios from 'axios';
 
     function Project() {
         const [project, setProjects] = useState(undefined)
@@ -16,6 +17,21 @@ import AddProject from './AddProject';
             const indexedImg = imagefiles[indx]
             const newImgs = imagefiles.filter(img => img !== indexedImg)
             setImageFiles(newImgs)
+        }
+        const handleSubmit = () => {
+            const formdatawimg = new FormData()
+            formdatawimg.append('title', title)
+            formdatawimg.append('description', description)
+            formdatawimg.append('department', 'UI/UX')
+    
+            const formdata = new FormData()
+            formdata.append('title', title)
+            formdata.append('description', description)
+            formdata.append('department', 'UI/UX')
+            formdata.append('image', imgfile)
+            axios({url:fetchLink('snippet/add'), data:imgfile? formdata : formdatawimg, method:'POST', headers:{"Content-Type":"application/json"}})
+            .then((value) => console.log(value.data))
+            .catch((error) => console.log(error))
         }
         if(project?.length === 0 || !project){
             return (
