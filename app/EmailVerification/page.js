@@ -1,9 +1,11 @@
 import EmailVerification from '@/Components/EmailVerification/EmailVerification'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 function Home() {
   return (
-    <EmailVerification/>
+    <Suspense>
+      <EmailVerification/>
+    </Suspense>
   )
 }
 

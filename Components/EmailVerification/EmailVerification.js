@@ -12,6 +12,7 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import validUsername from '@/Functions/validUsername';
 import axios from 'axios';
 
+
 function EmailVerification() {
     const [svalue, setSvalue] = useState(['', '', '', '', '', ''])
     const searchparams = useSearchParams()
