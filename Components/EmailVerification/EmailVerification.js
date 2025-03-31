@@ -10,7 +10,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import TkcInput from '../TkcInput';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import validUsername from '@/Functions/validUsername';
-import { validateEmail } from '@/Functions/validateEmail';
 import axios from 'axios';
 
 function EmailVerification() {
