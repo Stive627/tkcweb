@@ -6,8 +6,11 @@ import { useScreen } from '@/Hooks/useScreen'
 import RegistrationForm from './RegistrationForm'
 import { validateEmail } from '@/Functions/validateEmail'
 import validatePassword from '@/Functions/validatePassword'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 function Register() {
+    const router = useRouter()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [repassword, setRePassword] = useState('')
@@ -16,7 +19,13 @@ function Register() {
     function handleSubmit(e){
       e.preventDefault()
       const formdata = new FormData()
-      formdata.append('')
+      formdata.append('email', email)
+      axios({url:fetchLink('user/emailverification'), data:formdata, method:"POST", headers:{"Content-Type":"application/json"}})
+      .then((value) => {
+        console.log(value.data)
+        router.push(`/EmailVerification?code=${value.data.code}&password=${password}&email=${email}`)
+      })
+      .catch(err => console.error(err))
     }
   return (
     <div className=' flex w-full justify-center'>
@@ -28,7 +37,7 @@ function Register() {
               </div>
           </div>
           <p className=' font-semibold text-[20px] text-center pt-7 pb-2.5'>Register to continue</p>
-          <RegistrationForm validFom={validForm} email={email} password={password} repassword={repassword} setPassword={setPassword} setRePassword={setRePassword} setEmail={setEmail}/>
+          <RegistrationForm handleSubmit={handleSubmit} validFom={validForm} email={email} password={password} repassword={repassword} setPassword={setPassword} setRePassword={setRePassword} setEmail={setEmail}/>
         </div>
     </div>
   )
