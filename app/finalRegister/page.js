@@ -1,9 +1,11 @@
 import FInalRegister from '@/Components/Register/FinalRegister'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 function Home() {
   return (
-    <FInalRegister/>
+    <Suspense>
+      <FInalRegister/>
+    </Suspense>
   )
 }
 

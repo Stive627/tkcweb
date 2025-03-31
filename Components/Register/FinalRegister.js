@@ -7,12 +7,15 @@ import { useScreen } from '@/Hooks/useScreen'
 import Link from 'next/link'
 import RegistrationForm from './RegistrationForm'
 import FinalRegistration from './FinalRegistration'
+import {useSearchParams } from 'next/navigation'
 
 function FInalRegister() {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [repassword, setRePassword] = useState('')
-    const large = useScreen()
+  const params = useSearchParams()
+  const emailParams = params.get('email')
+  const [username, setUsername] = useState(/[^@]*/.exec(emailParams)[0])
+  const [password, setPassword] = useState('')
+  const [repassword, setRePassword] = useState('')
+  const large = useScreen()
   return (
     <div className=' flex w-full justify-center'>
         <div className={`mt-10 ${large && 'w-1/4'}`}>
