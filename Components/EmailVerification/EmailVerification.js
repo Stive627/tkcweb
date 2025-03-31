@@ -58,7 +58,7 @@ function EmailVerification() {
           </div>
             <div className=' flex justify-center'>
             <div className=' flex flex-row gap-5 overflow-hidden' style={{width:large?'450px':'350px'}}>
-            <div className=' border' style={{width:large?'450px':'350px'}}>
+            <div className=' ' style={{width:large?'450px':'350px'}}>
               <div style={{width:large?'450px':'350px'}} className='  mt-15  flex flex-row items-center text-[20px] font-semibold'>
                 <Link href={'/register'}><ArrowBackIcon/></Link>
                 <div className=' grow'><p className=' text-center'>E-Mail Verification</p></div>
@@ -72,7 +72,7 @@ function EmailVerification() {
               <p className=' mt-5 px-9 cursor-pointer' style={{color:'rgba(2, 72, 200, 1)'}}>Resend Code</p>
               <div className=' flex justify-center mt-7' ><button onClick={()=> handleVerify()} style={{backgroundColor:svalue.join('').length === 6 ? 'rgba(2, 72, 200, 1)':'rgba(93, 125, 186, 1)'}} className=' text-white text-[16px] rounded-sm w-1/2 border-black font-semibold p-2 cursor-pointer'>Continue</button></div>
             </div>
-            <div className=' border flex justify-center items-center' style={{width:large?'450px':'350px'}} ref={usernameRef}>
+            <div className='  flex justify-center items-center' style={{width:large?'450px':'350px'}} ref={usernameRef}>
               <div className=''>
                 <p className=' text-[21px] ' style={{width:large?'450px':'350px'}}  >Your username</p>
                 <TkcInput className={'w-3/4 my-3 '} value={username} handleChange={setUsername} placeholder={'Enter the username'}/>
