@@ -6,10 +6,12 @@ import TkcInput from '../TkcInput'
 import { useScreen } from '@/Hooks/useScreen'
 import Link from 'next/link'
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 function Login() {
     const [usernameoremail, setUsernameoremail] = useState('')
     const [password, setPassword] = useState('')
+    const router = useRouter()
     const large = useScreen()
     function handleSubmit(e){
         e.preventDefault()
@@ -17,7 +19,7 @@ function Login() {
         formdata.append('usernameoremail', usernameoremail)
         formdata.append('password', password)
         axios({url:fetchLink('user/login'), method:'POST', data:formdata, headers:{"Content-Type":"application/json"}})
-        .then((value) => console.log(value.data))
+        .then((value) => {console.log(value.data); router.push('/')})
         .catch(err => console.error(err))
     }
   return (
@@ -35,7 +37,7 @@ function Login() {
             <TkcInput placeholder={'Password'} value={password} handleChange={setPassword}/>
             <div className=' flex justify-center'><button type='submit' className=' text-white font-semibold w-full p-2 rounded-md cursor-pointer' style={{backgroundColor:'rgba(7, 60, 160, 1)'}} disabled={false}>Register</button></div>
         </form>
-        <p className=' text-center text-[16px] py-4'>Don&#39;t have an account? <Link className=' underline text-blue-600' href={'/register'}>Sing Up</Link> </p>
+        <p className=' text-center text-[16px] py-4'>Don&#39;t have an account? <Link className=' underline text-blue-600' href={'/register'}>Sign Up</Link> </p>
         <p className=' text-center text-[16px]'>Forgot password? <Link className=' underline text-blue-600' href={'/login'}>Recover</Link> </p>
         </div>
     </div>
