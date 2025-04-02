@@ -6,12 +6,10 @@ import TkcInput from '../TkcInput'
 import { useScreen } from '@/Hooks/useScreen'
 import Link from 'next/link'
 import axios from 'axios'
-import { useRouter } from 'next/navigation'
 
 function Login() {
     const [usernameoremail, setUsernameoremail] = useState('')
     const [password, setPassword] = useState('')
-    const router = useRouter()
     const large = useScreen()
     function handleSubmit(e){
         e.preventDefault()
@@ -19,7 +17,7 @@ function Login() {
         formdata.append('usernameoremail', usernameoremail)
         formdata.append('password', password)
         axios({url:fetchLink('user/login'), method:'POST', withCredentials:true, data:formdata, headers:{"Content-Type":"application/json"}})
-        .then((value) => router.refresh())
+        .then((value) => {console.log(value.data); window.location.reload()})
         .catch(err => console.error(err))
     }
   return (
