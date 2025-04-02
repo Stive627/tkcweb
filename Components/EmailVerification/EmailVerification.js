@@ -9,8 +9,8 @@ import Squares from './Squares';
 import { useRouter, useSearchParams } from 'next/navigation';
 import TkcInput from '../TkcInput';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import validUsername from '@/Functions/validUsername';
 import axios from 'axios';
+import isValidUsername from '@/Functions/isValidUsername';
 
 
 function EmailVerification() {
@@ -82,7 +82,7 @@ function EmailVerification() {
                   username will be @abcuiux</p>
                   </div>
                 </div>
-                <div className=' flex justify-center mt-4 text-white'><button onClick={() => handleFinish()} disabled={!validUsername(username)} className=' p-2 rounded-md w-1/2 cursor-pointer' style={{borderColor:'rgba(2, 72, 200, 1)', backgroundColor:validUsername(username)?'rgba(7, 60, 160, 1)':'rgba(101, 137, 204, 1)'}}>Finish</button></div>
+                <div className=' flex justify-center mt-4 text-white'><button onClick={() => handleFinish()} disabled={!isValidUsername(username)} className=' p-2 rounded-md w-1/2 cursor-pointer' style={{borderColor:'rgba(2, 72, 200, 1)', backgroundColor:validUsername(username)?'rgba(7, 60, 160, 1)':'rgba(101, 137, 204, 1)'}}>Finish</button></div>
               </div>
             </div>
           </div>
