@@ -3,9 +3,9 @@ import React, { useRef, useState } from 'react'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import TkcInput from '../TkcInput';
 import { useScreen } from '@/Hooks/useScreen';
-import validatePassword from '@/Functions/validatePassword';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import validUsername from '@/Functions/validUsername';
+import isValidatePassword from '@/Functions/isValidatePassword';
+import isValidUsername from '@/Functions/isValidUsername';
 
 
 const EnterPassword = ({password, setpassword, handleNext, passwordRef}) => {
@@ -16,7 +16,7 @@ const EnterPassword = ({password, setpassword, handleNext, passwordRef}) => {
             <p className=' text-[21px]'>Enter your password</p>
             <TkcInput  className={`  my-2.5 ${large ? 'w-96':'w-72'}`} value={password} handleChange={setpassword} placeholder={'Enter your password'}/>
             <p className='text-[11px]'>The password must contain at least six characters, a number, and a capital letter.</p>
-            <div className=' flex justify-center'><button  onClick={()=> handleNext()} className={`text-white font-semibold ${large? 'w-1/3':'w-1/2' } p-2 rounded-md cursor-pointer`} style={{backgroundColor:validatePassword(password)?'rgba(7, 60, 160, 1)':'rgba(101, 137, 204, 1)'}} disabled={!validatePassword(password)}>Continue</button></div>
+            <div className=' flex justify-center'><button  onClick={()=> handleNext()} className={`text-white font-semibold ${large? 'w-1/3':'w-1/2' } p-2 rounded-md cursor-pointer`} style={{backgroundColor:isValidatePassword(password)?'rgba(7, 60, 160, 1)':'rgba(101, 137, 204, 1)'}} disabled={!isValidatePassword(password)}>Continue</button></div>
         </div>
     )
 }
@@ -45,7 +45,7 @@ const UsernameUX = ({username, setUsername, usernameRef, handleNext}) => {
                   username will be @abcuiux</p>
                   </div>
             </div>
-            <div className=' flex justify-center mt-3.5'><button  onClick={()=> handleNext()} className=' text-white font-semibold w-1/3 p-2 rounded-md cursor-pointer' style={{backgroundColor:validUsername(username)?'rgba(7, 60, 160, 1)':'rgba(101, 137, 204, 1)'}} disabled={!validUsername(username)}>Finish</button></div>
+            <div className=' flex justify-center mt-3.5'><button  onClick={()=> handleNext()} className=' text-white font-semibold w-1/3 p-2 rounded-md cursor-pointer' style={{backgroundColor:isValidUsername(username)?'rgba(7, 60, 160, 1)':'rgba(101, 137, 204, 1)'}} disabled={!isValidUsername(username)}>Finish</button></div>
         </div>
     )
 }

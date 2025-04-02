@@ -1,4 +1,4 @@
-export function validateEmail(email){
+export function isValidateEmail(email){
     return String(email)
       .toLowerCase()
       .match(

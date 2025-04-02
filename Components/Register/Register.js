@@ -4,10 +4,10 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import { useScreen } from '@/Hooks/useScreen'
 import RegistrationForm from './RegistrationForm'
-import { validateEmail } from '@/Functions/validateEmail'
-import validatePassword from '@/Functions/validatePassword'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import { isValidateEmail } from '@/Functions/isValidateEmail'
+import isValidatePassword from '@/Functions/isValidatePassword'
 
 function Register() {
     const router = useRouter()
@@ -15,7 +15,7 @@ function Register() {
     const [password, setPassword] = useState('')
     const [repassword, setRePassword] = useState('')
     const large = useScreen()
-    const validForm = validateEmail(email) && validatePassword(password) && (password === repassword)
+    const validForm = isValidateEmail(email) && isValidatePassword(password) && (password === repassword)
     function handleSubmit(e){
       e.preventDefault()
       const formdata = new FormData()

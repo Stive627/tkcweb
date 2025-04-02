@@ -18,7 +18,7 @@ function Login() {
         const formdata = new FormData()
         formdata.append('usernameoremail', usernameoremail)
         formdata.append('password', password)
-        axios({url:fetchLink('user/login'), method:'POST', data:formdata, headers:{"Content-Type":"application/json"}})
+        axios({url:fetchLink('user/login'), method:'POST', data:formdata, headers:{"Content-Type":"application/json"}, withCredentials:true})
         .then((value) => {console.log(value.data); router.push('/')})
         .catch(err => console.error(err))
     }
@@ -36,7 +36,7 @@ function Login() {
             <form onSubmit={(e) => handleSubmit(e)}  className='flex flex-col gap-3'>
                 <TkcInput placeholder={'Username or email'} value={usernameoremail} handleChange={setUsernameoremail}/>
                 <TkcInput placeholder={'Password'} value={password} handleChange={setPassword}/>
-                <div className=' flex justify-center'><button type='submit' className=' text-white font-semibold w-full p-2 rounded-md cursor-pointer' style={{backgroundColor:'rgba(7, 60, 160, 1)'}} disabled={false}>Register</button></div>
+                <div className=' flex justify-center'><button type='submit' className=' text-white font-semibold w-full p-2 rounded-md cursor-pointer' style={{backgroundColor:'rgba(7, 60, 160, 1)'}} disabled={false}>Login</button></div>
             </form>
             <p className=' text-center text-[16px] py-4'>Don&#39;t have an account? <Link className=' underline text-blue-600' href={'/register'}>Sign Up</Link> </p>
             <p className=' text-center text-[16px]'>Forgot password? <Link className=' underline text-blue-600' href={'/login'}>Recover</Link> </p>
