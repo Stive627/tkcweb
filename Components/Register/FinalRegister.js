@@ -2,10 +2,7 @@
 import fetchLink from '@/Functions/fetchLink'
 import Image from 'next/image'
 import React, { useState } from 'react'
-import TkcInput from '../TkcInput'
 import { useScreen } from '@/Hooks/useScreen'
-import Link from 'next/link'
-import RegistrationForm from './RegistrationForm'
 import FinalRegistration from './FinalRegistration'
 import {useSearchParams } from 'next/navigation'
 
