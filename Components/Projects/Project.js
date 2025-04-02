@@ -29,7 +29,7 @@ import axios from 'axios';
             formdata.append('description', description)
             formdata.append('department', 'UI/UX')
             formdata.append('image', imgfile)
-            axios({url:fetchLink('snippet/add'), data:imgfile? formdata : formdatawimg, method:'POST', headers:{"Content-Type":"application/json"}})
+            axios({url:fetchLink('snippet/add'), withCredentials:true, data:imgfile? formdata : formdatawimg, method:'POST', headers:{"Content-Type":"application/json"}})
             .then((value) => console.log(value.data))
             .catch((error) => console.log(error))
         }

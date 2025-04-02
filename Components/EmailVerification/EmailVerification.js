@@ -40,7 +40,7 @@ function EmailVerification() {
       formdata.append('username', username)
       formdata.append('email', email)
       formdata.append('password', password)
-      axios({url:fetchLink('user/register'), method:'POST', data:formdata, headers:{"Content-Type":"application/json"}})
+      axios({url:fetchLink('user/register'), method:'POST', data:formdata, withCredentials:true, headers:{"Content-Type":"application/json"}})
       .then((value) => {
         console.log(value.data)
         router.push('/')

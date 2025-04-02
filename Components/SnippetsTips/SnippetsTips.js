@@ -26,7 +26,7 @@ function SnippetsTips() {
         formdata.append('description', description)
         formdata.append('department', 'UI/UX')
         formdata.append('image', imgfile)
-        axios({url:fetchLink('snippet/add'), data:formdata, method:'POST', headers:{"Content-Type":"application/json"}})
+        axios({url:fetchLink('snippet/add'), withCredentials:true, data:formdata, method:'POST', headers:{"Content-Type":"application/json"}})
         .then((value) => {console.log(value.data); setTips(tips? [... tips, {title:title, description:description, imgfile:imgfile}] : [{title:title, description:description, image:imgfile}])})
         .catch((error) => console.log(error))
     }
