@@ -6,18 +6,30 @@ import TkcInput from '../TkcInput'
 import { useScreen } from '@/Hooks/useScreen'
 import Link from 'next/link'
 import axios from 'axios'
+import { usePathname, useRouter } from 'next/navigation'
 
 function Login() {
     const [usernameoremail, setUsernameoremail] = useState('')
     const [password, setPassword] = useState('')
     const large = useScreen()
+    const pathname= usePathname()
+    const router = useRouter()
     function handleSubmit(e){
         e.preventDefault()
         const formdata = new FormData()
         formdata.append('usernameoremail', usernameoremail)
         formdata.append('password', password)
         axios({url:fetchLink('user/login'), method:'POST', withCredentials:true, data:formdata, headers:{"Content-Type":"application/json"}})
-        .then((value) => {console.log(value.data); window.location.reload()})
+        .then((value) => {
+            console.log(value.data)
+            if(pathname === '/'){
+                window.location.reload()
+            }
+            else{
+                router.push('/')
+            }
+            
+        })
         .catch(err => console.error(err))
     }
   return (
@@ -36,7 +48,7 @@ function Login() {
                 <TkcInput placeholder={'Password'} value={password} handleChange={setPassword}/>
                 <div className=' flex justify-center'><button type='submit' className=' text-white font-semibold w-full p-2 rounded-md cursor-pointer' style={{backgroundColor:'rgba(7, 60, 160, 1)'}} disabled={false}>Login</button></div>
             </form>
-            <p className=' text-center text-[16px] py-4'>Don&#39;t have an account? <Link className=' underline text-blue-600' href={'/register'}>Sign Up</Link> </p>
+            <p className=' text-center text-[16px] py-4'>Don&#39;t have an account?<Link className=' underline text-blue-600' href={'/register'}>Sign Up</Link> </p>
             <p className=' text-center text-[16px]'>Forgot password? <Link className=' underline text-blue-600' href={'/login'}>Recover</Link> </p>
             </div>
         </div>
