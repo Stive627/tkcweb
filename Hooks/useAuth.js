@@ -1,3 +1,4 @@
+"use client"
 import fetchLink from "@/Functions/fetchLink";
 import axios from "axios";
 import { useEffect, useState } from "react";

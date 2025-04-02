@@ -1,3 +1,4 @@
+"use client"
 import HOmeTKC from "@/Components/Home/HomeTKC";
 import Login from "@/Components/Login/Login";
 import useAuth from "@/Hooks/useAuth";
