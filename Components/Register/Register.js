@@ -20,7 +20,7 @@ function Register() {
       e.preventDefault()
       const formdata = new FormData()
       formdata.append('email', email)
-      axios({url:fetchLink('user/emailverification'), withCredentials:true, data:formdata, method:"POST", headers:{"Content-Type":"application/json"}})
+      axios({url:fetchLink('user/emailverification'), data:formdata, method:"POST", headers:{"Content-Type":"application/json"}})
       .then((value) => {
         console.log(value.data)
         router.push(`/EmailVerification?code=${value.data.code}&password=${password}&email=${email}`)
