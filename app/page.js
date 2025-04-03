@@ -8,7 +8,7 @@ export default function Home() {
   switch(auth){
     case true:
       return <HOmeTKC/>
-    case true:
+    default:
       return <Login/>
   }
 }
