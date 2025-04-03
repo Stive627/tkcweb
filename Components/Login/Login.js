@@ -19,9 +19,10 @@ function Login() {
         const formdata = new FormData()
         formdata.append('usernameoremail', usernameoremail)
         formdata.append('password', password)
-        axios({url:fetchLink('user/login'), method:'POST', withCredentials:true, data:formdata, headers:{"Content-Type":"application/json"}})
+        axios({url:fetchLink('user/login'), method:'POST', data:formdata, headers:{"Content-Type":"application/json"}})
         .then((value) => {
             console.log(value.data)
+            localStorage.setItem('tkc_token', value.data.token)
             if(pathname === '/'){
                 window.location.reload()
             }
