@@ -9,7 +9,7 @@ export default function useAuth(){
         const token = localStorage.getItem('tkc_token')
         axios({url:fetchLink('user/connect'), method:'GET', headers:{"Content-Type":"application/json", Authorization:`Bearer ${token}`}})
         .then((value)=> {setAuth(value.data.authenticated); console.log(value.data)})
-        .catch(err => console.error(err))
+        .catch(err => {setAuth(err.response.data.authenticated); console.log(err.response.data)})
     },[])
     return auth
 }
