@@ -22,7 +22,9 @@ function Login() {
         axios({url:fetchLink('user/login'), method:'POST', data:formdata, headers:{"Content-Type":"application/json"}})
         .then((value) => {
             console.log(value.data)
-            localStorage.setItem('tkc_token', value.data.token)
+            if(typeof window !== 'undefined'){
+                localStorage.setItem('tkc_token', value.data.token)
+            }
             if(pathname === '/'){
                 window.location.reload()
             }
