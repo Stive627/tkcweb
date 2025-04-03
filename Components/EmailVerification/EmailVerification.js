@@ -17,10 +17,12 @@ function EmailVerification() {
     const [svalue, setSvalue] = useState(['', '', '', '', '', ''])
     const searchparams = useSearchParams()
     const code = searchparams.get('code')
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
     const usernameRef = useRef(undefined)
     const email = searchparams.get('email')
     const [username, setUsername] = useState(/[^@]*/.exec(email)[0])
+    const [err, setErr] = useState('')
     const password = searchparams.get('password')
     const handleSvalue = (indx, val) => {
       const newArrValue = [...svalue]
@@ -40,12 +42,14 @@ function EmailVerification() {
       formdata.append('username', username)
       formdata.append('email', email)
       formdata.append('password', password)
+      setLoading(true)
       axios({url:fetchLink('user/register'), method:'POST', data:formdata, headers:{"Content-Type":"application/json"}})
       .then((value) => {
         console.log(value.data)
         router.push('/')
       })
-      .catch(err => console.error(err))
+      .catch(err => {console.error(err.response.data); setErr(err.response.data)})
+      .finally(()=>setLoading(false))
     }
   return (
     <div className=' flex w-full justify-center'>
@@ -70,11 +74,12 @@ function EmailVerification() {
                 {svalue.map((elt, indx) => <Squares key={indx} indx={indx} setValue={handleSvalue} val={elt}/>)}
               </div>
               <p className=' mt-5 px-9 cursor-pointer' style={{color:'rgba(2, 72, 200, 1)'}}>Resend Code</p>
-              <div className=' flex justify-center mt-7' ><button onClick={()=> handleVerify()} style={{backgroundColor:svalue.join('').length === 6 ? 'rgba(2, 72, 200, 1)':'rgba(93, 125, 186, 1)'}} className=' text-white text-[16px] rounded-sm w-1/2 border-black font-semibold p-2 cursor-pointer'>Continue</button></div>
+              <div className=' flex justify-center mt-7' ><button onClick={()=> handleVerify()} style={{backgroundColor:svalue.join('').length === 6 && svalue.join('') === code ? 'rgba(2, 72, 200, 1)':'rgba(93, 125, 186, 1)'}} className=' text-white text-[16px] rounded-sm w-1/2 border-black font-semibold p-2 cursor-pointer'>Continue</button></div>
             </div>
             <div className='  flex justify-center items-center' style={{width:large?'450px':'350px'}} ref={usernameRef}>
               <div className=''>
-                <p className=' text-[21px] ' style={{width:large?'450px':'350px'}}  >Your username</p>
+                {err &&<p className=' text-center text-red-600'>{err}</p>}
+                <p className=' text-[21px] ' style={{width:large?'450px':'350px'}}>Your username</p>
                 <TkcInput className={'w-3/4 my-3 '} value={username} handleChange={setUsername} placeholder={'Enter the username'}/>
                 <div className=' text-[10px] relative' style={{color:'rgba(0, 0, 0, 0.78)'}}>
                   <p><ErrorOutlineIcon/>Please add your role after your name.</p>
@@ -82,7 +87,7 @@ function EmailVerification() {
                   username will be @abcuiux</p>
                   </div>
                 </div>
-                <div className=' flex justify-center mt-4 text-white'><button onClick={() => handleFinish()} disabled={!isValidUsername(username)} className=' p-2 rounded-md w-1/2 cursor-pointer' style={{borderColor:'rgba(2, 72, 200, 1)', backgroundColor:validUsername(username)?'rgba(7, 60, 160, 1)':'rgba(101, 137, 204, 1)'}}>Finish</button></div>
+                <div className=' flex justify-center mt-4 text-white'><button onClick={() => handleFinish()} disabled={!isValidUsername(username)} className=' p-2 rounded-md w-1/2 cursor-pointer' style={{borderColor:'rgba(2, 72, 200, 1)', backgroundColor:isValidUsername(username)?(loading? 'rgba(2, 72, 200, 0.14)':'rgba(7, 60, 160, 1)'):'rgba(101, 137, 204, 1)'}}>Finish</button></div>
               </div>
             </div>
           </div>

@@ -14,18 +14,21 @@ function Register() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [repassword, setRePassword] = useState('')
+    const [loading, setLoading] = useState(false)
     const large = useScreen()
     const validForm = isValidateEmail(email) && isValidatePassword(password) && (password === repassword)
     function handleSubmit(e){
       e.preventDefault()
       const formdata = new FormData()
       formdata.append('email', email)
+      setLoading(true)
       axios({url:fetchLink('user/emailverification'), data:formdata, method:"POST", headers:{"Content-Type":"application/json"}})
       .then((value) => {
         console.log(value.data)
         router.push(`/EmailVerification?code=${value.data.code}&password=${password}&email=${email}`)
       })
       .catch(err => console.error(err))
+      .finally(()=>setLoading(false))
     }
   return (
     <div className=' flex w-full justify-center'>
@@ -37,7 +40,7 @@ function Register() {
               </div>
           </div>
           <p className=' font-semibold text-[20px] text-center pt-7 pb-2.5'>Register to continue</p>
-          <RegistrationForm handleSubmit={handleSubmit} validFom={validForm} email={email} password={password} repassword={repassword} setPassword={setPassword} setRePassword={setRePassword} setEmail={setEmail}/>
+          <RegistrationForm loading={loading} handleSubmit={handleSubmit} validFom={validForm} email={email} password={password} repassword={repassword} setPassword={setPassword} setRePassword={setRePassword} setEmail={setEmail}/>
         </div>
     </div>
   )
