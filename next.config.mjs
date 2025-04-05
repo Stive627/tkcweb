@@ -3,9 +3,9 @@ const nextConfig = {
   images: {
       remotePatterns: [
         {
-          protocol: 'http',
-          hostname: 'localhost',
-          port: '3004',
+          protocol: 'https',
+          hostname: 'tkcapi.tsasoft.com',
+          port: '',
           pathname: '/**',
           search: '',
         },

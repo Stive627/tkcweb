@@ -20,6 +20,7 @@ function EmailVerification() {
     const [loading, setLoading] = useState(false)
     const router = useRouter()
     const usernameRef = useRef(undefined)
+    const [currIndx, setCurrIndx] = useState(0)
     const email = searchparams.get('email')
     const [username, setUsername] = useState(/[^@]*/.exec(email)[0])
     const [err, setErr] = useState('')
@@ -71,7 +72,7 @@ function EmailVerification() {
                 <p>Enter the 06-digits code sent to <span className=' font-bold'>{email}</span></p>
               </div>
               <div className={`flex justify-between w-full  gap-1 ${large && 'px-4'}`}>
-                {svalue.map((elt, indx) => <Squares key={indx} indx={indx} setValue={handleSvalue} val={elt}/>)}
+                {svalue.map((elt, indx) => <Squares currIndx={currIndx} setCurrIndx={setCurrIndx} key={indx} indx={indx} setValue={handleSvalue} val={elt}/>)}
               </div>
               <p className=' mt-5 px-9 cursor-pointer' style={{color:'rgba(2, 72, 200, 1)'}}>Resend Code</p>
               <div className=' flex justify-center mt-7' ><button onClick={()=> handleVerify()} style={{backgroundColor:svalue.join('').length === 6 && svalue.join('') === code ? 'rgba(2, 72, 200, 1)':'rgba(93, 125, 186, 1)'}} className=' text-white text-[16px] rounded-sm w-1/2 border-black font-semibold p-2 cursor-pointer'>Continue</button></div>
