@@ -8,7 +8,7 @@ function ContentSnippet({tips, handleAddTips}) {
     const handleOpen = (indx) => setOpenTip(indx)
     const large = useScreen()
   return (
-      <div className=' w-full flex justify-center'>
+      <div style={{height:large?'780px':'530px', }} className=' w-full flex justify-center snippetscroll'>
         <div className={`${large? 'w-2/3':'w-full'}`}>
           <div className={`mt-7 flex flex-col gap-3 divide-y divide-gray-300 ml-3 `}>
             {
