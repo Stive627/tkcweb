@@ -8,7 +8,7 @@ export default function useAuth(){
     useEffect(() => {
         const token = localStorage.getItem('tkc_token')
         console.log(token)
-        axios({url:fetchLink('user/connect'), method:'GET', headers:{"Content-Type":"application/json", Authorization:`a${token}`}})
+        axios({url:fetchLink('user/connect'), method:'GET', headers:{"Content-Type":"application/json", Authorization:`${token}`}})
         .then((value)=> {setAuth(value.data.authenticated); console.log(value.status)})
         .catch(err => {console.log(err.response); setAuth(err.response.data.authenticated)})
     },[])
