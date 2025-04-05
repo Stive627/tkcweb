@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useScreen } from '@/Hooks/useScreen'
 import Image from 'next/image'
 import fetchLink from '@/Functions/fetchLink'
 import AddSnippetTips from './AddSnipetTips'
 import axios from 'axios'
 import ContentSnippet from './ContentSnippet'
-import useSnippet from '@/Hooks/useSnippet'
 
 function SnippetsTips() {
-    const tips = useSnippet()
+    const [snippets, setSnippets] = useState(undefined)
+    useEffect(() => {
+        axios({url:fetchLink('snippet/'), method:'GET', headers:{"Content-Type":"application/json"}})
+        .then((value) => {setSnippets(value.data)})
+        .catch(err => console.log(err))
+    },[])
     const [addtips, setAddtips] = useState(false)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
@@ -27,11 +31,11 @@ function SnippetsTips() {
         formdata.append('department', 'UI/UX')
         formdata.append('image', imgfile)
         axios({url:fetchLink('snippet/add'), data:formdata, method:'POST', headers:{"Content-Type":"application/json"}})
-        .then((value) => {console.log(value.data); setTips(tips? [... tips, {title:title, description:description, imgfile:imgfile}] : [{title:title, description:description, image:imgfile}])})
+        .then((value) => {console.log(value.data) ; setAddtips(false); setSnippets(snippets? [...snippets, {title:title, description:description, imgfile:imgfile}] : [{title:title, description:description, image:imgfile}]); setTitle(''); setDescription(''); setImgFile(undefined)})
         .catch((error) => console.log(error))
     }
 
-  if(tips?.length === 0 || !tips){ 
+  if(snippets?.length === 0 || !snippets){ 
     return (
             <div className={`mt-4  h-96 flex justify-center items-center ${!large && 'ml-2'}`}>
                 { 
@@ -45,7 +49,8 @@ function SnippetsTips() {
         </div>
     )
  }
- return <ContentSnippet handleAddTips={handleAddTips} tips={tips}/>
+ if(addtips) return <AddSnippetTips handleSubmit={handleSubmit} handleDeleteImage={() => setImgFile(undefined)} handlCancel={()=>{setAddtips(false); setTitle(''); setDescription(''); setImgFile(undefined)}} title={title} description={description} imgfile={imgfile} setTitle={setTitle} setDescription={setDescription} setImgFile={setImgFile} domain={'UI/UX'}/>
+ return <ContentSnippet handleAddTips={handleAddTips} tips={snippets}/>
 }
 
 export default SnippetsTips

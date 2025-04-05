@@ -4,7 +4,7 @@ import { useScreen } from '@/Hooks/useScreen'
 import AddIcon from '@mui/icons-material/Add';
 
 function ContentSnippet({tips, handleAddTips}) {
-    const [openTip, setOpenTip] = useState(false)
+    const [openTip, setOpenTip] = useState('')
     const handleOpen = (indx) => setOpenTip(indx)
     const large = useScreen()
   return (
@@ -12,7 +12,7 @@ function ContentSnippet({tips, handleAddTips}) {
         <div className={`${large? 'w-2/3':'w-full'}`}>
           <div className={`mt-7 flex flex-col gap-3 divide-y divide-gray-300 ml-3 `}>
             {
-              tips.map((elt, indx) => <SingleContentLine key={indx} elt={elt} indx={indx} handlOpen={handleOpen} openTip={openTip}/>)
+              tips.map((elt, indx) => <SingleContentLine key={indx} elt={elt} indx={indx} handlOpen={handleOpen} openTip={openTip} setOpenTip={setOpenTip}/>)
             }
           </div>
      
