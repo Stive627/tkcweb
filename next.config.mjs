@@ -4,7 +4,7 @@ const nextConfig = {
       remotePatterns: [
         {
           protocol: 'https',
-          hostname: 'tkcapi.tsasoft.com',
+          hostname: 'https://tmxpddkrvu.ap-south-1.awsapprunner.com',
           port: '',
           pathname: '/**',
           search: '',
