@@ -12,8 +12,8 @@ function AddSnippetTips({domain, title, setTitle, description, setDescription, i
     const validAdd = title && description
     console.log(imgfile)
   return (
-    <div className=' flex justify-center relative top-8 ml-1.5 border'>
-        <div className={`border p-3 rounded-md  flex flex-col  gap-2.5 relative ${large ? 'w-2/3':'w-full'}`} style={{borderColor:'rgba(0, 0, 0, 0.22)', width:large?'860px':'370px'}}>
+    <div className=' flex justify-center relative top-8 ml-1.5 '>
+        <div className={`border p-3 rounded-md  flex flex-col  gap-2.5 relative ${large ? 'w-2/3':'w-full'}`} style={{borderColor:'rgba(0, 0, 0, 0.22)'}}>
             <div className='flex justify-between gap-2.5'>
                 <TkcInput borderColor={'rgba(0, 0, 0, 0.3)'} value={title} handleChange={setTitle} placeholder={'Enter the title of tip'} className={'w-full'}/>
                 <button style={{borderColor:'rgba(0, 0, 0, 0.3)'}} className=' border w-full rounded-md'>{domain}</button>

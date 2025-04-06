@@ -6,13 +6,7 @@ import AddSnippetTips from './AddSnipetTips'
 import axios from 'axios'
 import ContentSnippet from './ContentSnippet'
 
-function SnippetsTips() {
-    const [snippets, setSnippets] = useState(undefined)
-    useEffect(() => {
-        axios({url:fetchLink('snippet/'), method:'GET', headers:{"Content-Type":"application/json"}})
-        .then((value) => {setSnippets(value.data); console.log(value.data)})
-        .catch(err => console.log(err))
-    },[])
+function SnippetsTips({snippets, setSnippets}) {
     const [addtips, setAddtips] = useState(false)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
