@@ -31,7 +31,7 @@ function SnippetsTips() {
         formdata.append('department', 'UI/UX')
         formdata.append('image', imgfile)
         axios({url:fetchLink('snippet/add'), data:formdata, method:'POST', headers:{"Content-Type":"application/json"}})
-        .then((value) => {console.log(value.data) ; setAddtips(false); setSnippets(snippets? [...snippets, {title:title, description:description, image:imgfile}] : [{title:title, description:description, image:imgfile}]); setTitle(''); setDescription(''); setImgFile(undefined)})
+        .then((value) => {console.log(value.data) ; setAddtips(false); console.log(imgfile); setSnippets(snippets? [...snippets, {title:title, description:description, image:imgfile}] : [{title:title, description:description, image:imgfile}]); setTitle(''); setDescription(''); setImgFile(undefined)})
         .catch((error) => console.log(error))
     }
 

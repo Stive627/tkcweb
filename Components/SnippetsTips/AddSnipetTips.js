@@ -10,6 +10,7 @@ import { useScreen } from '@/Hooks/useScreen';
 function AddSnippetTips({domain, title, setTitle, description, setDescription, imgfile, setImgFile, handlCancel, handleDeleteImage, handleSubmit}) {
     const large = useScreen()
     const validAdd = title && description
+    console.log(imgfile)
   return (
     <div className={`border p-3 rounded-md  flex flex-col gap-2.5 relative ${large ? 'w-2/3':'w-full'}`} style={{borderColor:'rgba(0, 0, 0, 0.22)'}}>
         <div className='flex justify-between gap-2.5'>
