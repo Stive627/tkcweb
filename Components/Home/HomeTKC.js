@@ -13,7 +13,7 @@ function HOmeTKC() {
   const [showAvatar, setShowAvatar] = useState(false)
   const large = useScreen()
   return (
-    <div className=' w-screen flex justify-center '>
+    <div onClick={()=>{if(showAvatar){setShowAvatar(false)}else{return;}}} className=' w-screen flex justify-center '>
       <div className={`${large ? 'w-1/2 mt-5': 'w-full pr-2.5 mt-2'}  h-full`}>
         <div className={`flex flex-row justify-between`}>
           <div className=' flex flex-row  items-center'>
