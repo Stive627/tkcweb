@@ -2,14 +2,20 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import './snippet.css'
 import fetchLink from '@/Functions/fetchLink'
+import CloseIcon from '@mui/icons-material/Close';
 
-function SingleContentLine({indx, handlOpen, openTip, elt, setOpenTip}) {
+function SingleContentLine({indx, handlOpen, openTip, elt, setOpenTip, handleDeleteTips}) {
   const [show, setShow] = useState('false')
   return (
     <div onClick={()=>{if(show){setOpenTip(''); setShow('')}else{handlOpen(indx); setShow(String(indx))}}} style={{backgroundColor:indx%2 === 1 ? 'rgba(0, 0, 0, 0.04)':'white'}} className='cursor-pointer pb-2'>
-      <div className=' w-full flex flex-row  items-center gap-3.5'>
-        <div style={{borderColor:'rgba(46, 123, 253, 1)', backgroundColor:'rgba(151, 189, 253, 0.27)'}} className=' w-8 h-8 flex justify-center items-center border rounded-full'><p>{indx + 1}</p></div>
-        <p className='text-[16px]'>{elt.title}</p>
+      <div className=' w-full flex flex-row justify-between  items-center gap-3.5'>
+        <div className=' flex flex-row gap-3 items-center'>
+          <div style={{borderColor:'rgba(46, 123, 253, 1)', backgroundColor:'rgba(151, 189, 253, 0.27)'}} className=' w-8 h-8 flex justify-center items-center border rounded-full'><p>{indx + 1}</p></div>
+          <p className='text-[16px]'>{elt.title}</p>
+        </div>
+        {indx === openTip && <div className=' flex flex-row'>
+          <button onClick={()=> handleDeleteTips(elt._id)} className=' text-red-600'><CloseIcon/></button>
+          </div>}
       </div>
       <div className={`${(indx === openTip) ? 'show':'hidden'}`}>
           <div className={`border border-gray-50 `}>

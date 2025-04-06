@@ -29,6 +29,18 @@ function SnippetsTips() {
         .then((value) => {console.log(value.data); console.log(imgfile[0]); setAddtips(false); setSnippets(snippets? [...snippets, {title:title, description:description, image:imgfile}] : [{title:title, description:description, image:imgfile}]); setTitle(''); setDescription(''); setImgFile(undefined)})
         .catch((error) => console.log(error))
     }
+    const handleDeleteSnippet = (id) => {
+        console.log('clicked')
+        axios({url:fetchLink(`snippet/delete/${id}`),method:'DELETE'}).then((val) => {
+            console.log('done')
+            console.log(val.data)
+            const newSnippet = [...snippets]
+            const updatedSnippet = newSnippet.filter(elt => elt._id !== id)
+            console.log(updatedSnippet)
+            setSnippets(updatedSnippet)
+        })
+        .catch(err => {console.error(err); console.log('err')})
+    }
 
   if(snippets?.length === 0 || !snippets){ 
     return (
@@ -45,7 +57,7 @@ function SnippetsTips() {
     )
  }
  if(addtips) return <AddSnippetTips handleSubmit={handleSubmit} handleDeleteImage={() => setImgFile(undefined)} handlCancel={()=>{setAddtips(false); setTitle(''); setDescription(''); setImgFile(undefined)}} title={title} description={description} imgfile={imgfile} setTitle={setTitle} setDescription={setDescription} setImgFile={setImgFile} domain={'UI/UX'}/>
- return <ContentSnippet handleAddTips={handleAddTips} tips={snippets}/>
+ return <ContentSnippet handleAddTips={handleAddTips} tips={snippets} handleDeleteTips={handleDeleteSnippet}/>
 }
 
 export default SnippetsTips
