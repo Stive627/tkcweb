@@ -28,7 +28,7 @@ function Avatar({handleShow, show}) {
       <button onClick={()=> handleShow()} className={`${large? 'w-11 h-11':'w-8 h-8'} flex items-center justify-center border-2 rounded-full`} style={{borderColor:'rgba(85, 17, 168, 0.95)', backgroundColor:'rgba(85, 17, 168, 0.07)', color:'rgba(85, 17, 168, 1)'}}>
               <p>S</p>
         </button>
-    {show && <div style={{borderColor:'rgba(0, 0, 0, 0.22)'}} className={`border-2 rounded-lg bg-white absolute  divide-gray-300 cursor-pointer flex flex-col divide-y w-73 h-60 ${large? 'left-13 -top-0':'right-1 top-10'}`}>
+    {show && <div style={{borderColor:'rgba(0, 0, 0, 0.22)'}} className={`border-2 rounded-lg bg-white absolute  divide-gray-200 cursor-pointer flex flex-col divide-y w-73 h-60 ${large? 'left-13 -top-0':'right-1 top-10'}`}>
                 <div className=' p-2 w-full flex flex-row items-center gap-3'>
                     <button className={`${large? 'w-9 h-9':'w-8 h-8'} flex items-center justify-center border-2 rounded-full`} style={{borderColor:'rgba(85, 17, 168, 0.95)', backgroundColor:'rgba(85, 17, 168, 0.07)', color:'rgba(85, 17, 168, 1)'}}><p>S</p></button>
                     <div>

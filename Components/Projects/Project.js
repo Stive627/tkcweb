@@ -70,6 +70,8 @@ import axios from 'axios';
                 </div>
             )
         }
+        if(addProject) return <AddProject handlCancel={()=> setAddProject(false)} handleDeleteImage={handleDeleteImage}  title={title} description={description} setTitle={setTitle} setDescription={setDescription} imagefiles={imagefiles} setImageFiles={setImageFiles} domain={'UI/UX'}/>
+        return <AddProject/>
     }
 
 export default Project
