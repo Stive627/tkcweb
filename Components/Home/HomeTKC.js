@@ -6,9 +6,11 @@ import React, { useState } from 'react'
 import './home.css'
 import { useScreen } from '@/Hooks/useScreen';
 import Content from './Content';
+import Avatar from '../Avatar/Avatar';
 
 function HOmeTKC() {
   const [section, setSection] = useState(undefined)
+  const [showAvatar, setShowAvatar] = useState(false)
   const large = useScreen()
   return (
     <div className=' w-screen flex justify-center '>
@@ -20,9 +22,7 @@ function HOmeTKC() {
           </div>
           <div className=' flex flex-row gap-2 items-center'>
             <NotificationsNoneIcon sx={{fontSize:large? 35 : 25}}/>
-            <div className={`${large? 'w-9 h-9':'w-8 h-8'} flex items-center justify-center border rounded-full`} style={{borderColor:'rgba(0, 0, 0, 0.4)'}}>
-              <p>S</p>
-            </div>
+            <Avatar show={showAvatar} handleShow={()=>setShowAvatar(!showAvatar)}/>
           </div>
         </div>
         <div className={`flex justify-center ${large? 'mt-12':'mt-10'}`}>
