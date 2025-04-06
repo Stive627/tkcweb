@@ -10,7 +10,7 @@ function SnippetsTips() {
     const [snippets, setSnippets] = useState(undefined)
     useEffect(() => {
         axios({url:fetchLink('snippet/'), method:'GET', headers:{"Content-Type":"application/json"}})
-        .then((value) => {setSnippets(value.data)})
+        .then((value) => {setSnippets(value.data); console.log(value.data)})
         .catch(err => console.log(err))
     },[])
     const [addtips, setAddtips] = useState(false)
@@ -20,18 +20,13 @@ function SnippetsTips() {
     const large = useScreen()
     const handleAddTips = () => setAddtips(true)
     const handleSubmit = () => {
-        const formdatawimg = new FormData()
-        formdatawimg.append('title', title)
-        formdatawimg.append('description', description)
-        formdatawimg.append('department', 'UI/UX')
-
         const formdata = new FormData()
         formdata.append('title', title)
         formdata.append('description', description)
         formdata.append('department', 'UI/UX')
-        formdata.append('image', imgfile)
-        axios({url:fetchLink('snippet/add'), data:formdata, method:'POST', headers:{"Content-Type":"application/json"}})
-        .then((value) => {console.log(value.data) ; setAddtips(false); console.log(imgfile); setSnippets(snippets? [...snippets, {title:title, description:description, image:imgfile}] : [{title:title, description:description, image:imgfile}]); setTitle(''); setDescription(''); setImgFile(undefined)})
+        formdata.append('image', imgfile[0])
+        axios({url:fetchLink('snippet/add'), data:formdata, method:'POST'})
+        .then((value) => {console.log(value.data); console.log(imgfile[0]); setAddtips(false); setSnippets(snippets? [...snippets, {title:title, description:description, image:imgfile}] : [{title:title, description:description, image:imgfile}]); setTitle(''); setDescription(''); setImgFile(undefined)})
         .catch((error) => console.log(error))
     }
 

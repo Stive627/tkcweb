@@ -2,11 +2,9 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import './snippet.css'
 import fetchLink from '@/Functions/fetchLink'
-import { useScreen } from '@/Hooks/useScreen'
 
 function SingleContentLine({indx, handlOpen, openTip, elt, setOpenTip}) {
   const [show, setShow] = useState('false')
-  const large = useScreen()
   return (
     <div onClick={()=>{if(show){setOpenTip(''); setShow('')}else{handlOpen(indx); setShow(String(indx))}}} style={{backgroundColor:indx%2 === 1 ? 'rgba(0, 0, 0, 0.04)':'white'}} className='cursor-pointer pb-2'>
       <div className=' w-full flex flex-row  items-center gap-3.5'>

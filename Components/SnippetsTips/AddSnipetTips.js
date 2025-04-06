@@ -27,7 +27,7 @@ function AddSnippetTips({domain, title, setTitle, description, setDescription, i
         }
         <div className=' flex justify-between items-center'>
             <div>
-                <input type='file' multiple id='tipfile' className=' hidden'  onChange={(e)=>{setImgFile(e.target.files); console.log('hi')}}/>
+                <input type='file' multiple  id='tipfile' className=' hidden'  onChange={(e)=>{setImgFile(e.target.files); console.log('hi')}}/>
                 <label className={`${imgfile && 'hidden'}`}  htmlFor='tipfile'><AttachFileIcon className=' cursor-pointer' style={{color:'rgba(2, 72, 200, 1)'}}/></label>
             </div>
             <div className=' flex flex-row gap-2 text-[16px]'>
