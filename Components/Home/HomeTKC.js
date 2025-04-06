@@ -21,7 +21,7 @@ function HOmeTKC() {
               <p className={`font-semibold ${large ? 'text-[20px]':'text-[17px] top-1'} relative right-1 `}>TSA Knowledge Center</p>
           </div>
           <div className=' flex flex-row gap-2 items-center'>
-            <NotificationsNoneIcon sx={{fontSize:large? 35 : 25}}/>
+            <NotificationsNoneIcon sx={{fontSize:large? 40 : 25}}/>
             <Avatar show={showAvatar} handleShow={()=>setShowAvatar(!showAvatar)}/>
           </div>
         </div>

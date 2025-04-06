@@ -25,10 +25,10 @@ function Avatar({handleShow, show}) {
     const large = useScreen()
   return (
     <div className=' relative'>
-      <button onClick={()=> handleShow()} className={`${large? 'w-9 h-9':'w-8 h-8'} flex items-center justify-center border-2 rounded-full`} style={{borderColor:'rgba(85, 17, 168, 0.95)', backgroundColor:'rgba(85, 17, 168, 0.07)', color:'rgba(85, 17, 168, 1)'}}>
+      <button onClick={()=> handleShow()} className={`${large? 'w-11 h-11':'w-8 h-8'} flex items-center justify-center border-2 rounded-full`} style={{borderColor:'rgba(85, 17, 168, 0.95)', backgroundColor:'rgba(85, 17, 168, 0.07)', color:'rgba(85, 17, 168, 1)'}}>
               <p>S</p>
         </button>
-    {show && <div style={{borderColor:'rgba(0, 0, 0, 0.22)'}} className={`border-2 rounded-md bg-white absolute  divide-gray-400 cursor-pointer flex flex-col divide-y w-67 h-52 ${large? 'left-11 top-0':'right-1 top-9'}`}>
+    {show && <div style={{borderColor:'rgba(0, 0, 0, 0.22)'}} className={`border-2 rounded-md bg-white absolute  divide-gray-400 cursor-pointer flex flex-col divide-y w-67 h-52 ${large? 'left-14 -top-0':'right-1 top-9'}`}>
                 <div className=' p-2 w-full flex flex-row items-center gap-3'>
                     <button className={`${large? 'w-9 h-9':'w-8 h-8'} flex items-center justify-center border-2 rounded-full`} style={{borderColor:'rgba(85, 17, 168, 0.95)', backgroundColor:'rgba(85, 17, 168, 0.07)', color:'rgba(85, 17, 168, 1)'}}><p>S</p></button>
                     <div>
