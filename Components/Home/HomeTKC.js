@@ -11,7 +11,7 @@ import axios from 'axios';
 
 function HOmeTKC() {
   const [section, setSection] = useState(undefined)
-  const [showAvatar, setShowAvatar] = useState(true)
+  const [showAvatar, setShowAvatar] = useState(false)
   const [snippets, setSnippets] = useState(undefined)
   const [projects, setProjects] = useState(undefined)
   useEffect(() => {
