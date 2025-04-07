@@ -39,7 +39,7 @@ const VerifyPassword = ({repassword,password, setRepassword, repasswordRef, hand
 const UsernameUX = ({username, setUsername, usernameRef, handleFinish, err, loading}) => {
     const large = useScreen()
     return(
-        <div ref={usernameRef}>
+        <form onSubmit={handleFinish} ref={usernameRef}>
             {err && <p className=' text-[16px] text-red-600 text-center'>{err}</p>}
             <p className=' text-[21px]'>Your username</p>
             <TkcInput className={`  my-2.5 ${large ? 'w-96':'w-72'}`} value={username} handleChange={setUsername} placeholder={'Enter your username'}/>
@@ -49,8 +49,8 @@ const UsernameUX = ({username, setUsername, usernameRef, handleFinish, err, load
                   username will be @abcuiux</p>
                   </div>
             </div>
-            <div className=' flex justify-center mt-3.5'><button  onClick={()=> handleFinish()} className=' text-white font-semibold w-1/3 p-2 rounded-md cursor-pointer' style={{backgroundColor:isValidUsername(username)?(loading? 'rgba(101, 137, 204, 1)':'rgba(7, 60, 160, 1)'):'rgba(101, 137, 204, 1)'}} disabled={!isValidUsername(username)}>Finish</button></div>
-        </div>
+            <div className=' flex justify-center mt-3.5'><button type='submit'  className=' text-white font-semibold w-1/3 p-2 rounded-md cursor-pointer' style={{backgroundColor:isValidUsername(username)?(loading? 'rgba(101, 137, 204, 1)':'rgba(7, 60, 160, 1)'):'rgba(101, 137, 204, 1)'}} disabled={!isValidUsername(username)}>Finish</button></div>
+        </form>
     )
 }
 
