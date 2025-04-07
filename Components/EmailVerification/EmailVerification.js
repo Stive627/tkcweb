@@ -29,6 +29,7 @@ function EmailVerification() {
       const newArrValue = [...svalue]
         newArrValue[indx] = val
         setSvalue(newArrValue)
+        setCurrIndx(currIndx + 1)
     }
     const large = useScreen()
     const handleVerify = () => {
@@ -75,7 +76,7 @@ function EmailVerification() {
                 {svalue.map((elt, indx) => <Squares currIndx={currIndx} setCurrIndx={setCurrIndx} key={indx} indx={indx} setValue={handleSvalue} val={elt}/>)}
               </div>
               <p className=' mt-5 px-9 cursor-pointer' style={{color:'rgba(2, 72, 200, 1)'}}>Resend Code</p>
-              <div className=' flex justify-center mt-7' ><button onClick={()=> handleVerify()} style={{backgroundColor:svalue.join('').length === 6 && svalue.join('') === code ? 'rgba(2, 72, 200, 1)':'rgba(93, 125, 186, 1)'}} className=' text-white text-[16px] rounded-sm w-1/2 border-black font-semibold p-2 cursor-pointer'>Continue</button></div>
+              <div className=' flex justify-center mt-7' ><button onClick={()=> handleVerify()} style={{backgroundColor:svalue.join('').length === 6 && svalue.join('') === code ? 'rgba(2, 72, 200, 1)':'rgba(93, 125, 186, 1)'}} disabled={!(svalue.join('').length === 6 && svalue.join('') === code)} className=' text-white text-[16px] rounded-sm w-1/2 border-black font-semibold p-2 cursor-pointer'>Continue</button></div>
             </div>
             <div className='  flex justify-center items-center' style={{width:large?'450px':'350px'}} ref={usernameRef}>
               <div className=''>
