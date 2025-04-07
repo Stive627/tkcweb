@@ -113,6 +113,7 @@ function FinalRegistration({password, repassword, handlePassword, handleSetpassw
       </div>
       <div className=' flex justify-center'>
         <div className={`flex flex-row  gap-18 overflow-hidden  ${large ? 'w-96':'w-72'} `}>
+            <p>{email} sinon ca n'existe pas</p>
             <EnterPassword passwordRef={passwordRef} password={password} setpassword={handlePassword} handleNext={handleNext}/>
             <VerifyPassword password={password} repasswordRef={repasswordRef} repassword={repassword} setRepassword={handleSetpassword} handleNext={handleNext}/>
             <UsernameUX usernameRef={usernameRef} username={username} setUsername={handleUsername} handleFinish={handleFinish} err={err} loading={loading}/>
