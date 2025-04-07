@@ -37,7 +37,7 @@ import ContentProject from './ContentProject';
             return (
                 <div className={`mt-4 ${!large && 'ml-2'}`}>
                     {large?
-                        <div className = 'flex flex-row w-full gap-1' style={{height:'700px'}}>
+                        <div className = 'flex flex-row w-full gap-1 mt-10' style={{height:'700px'}}>
                             <div className=' flex flex-col gap-3'>
                                 {projects?.map((elt, indx) => <Image key={indx} onClick={()=> setIndxProject(indx)} src={fetchLink(elt.images[0].slice(7))} alt={`project no${indx+1}`} width={80} height={80}/>)}
                                 <button onClick={()=> setAddProject(true)} className=' w-20 h-20 border flex justify-center items-center cursor-pointer' style={{borderStyle:'dashed', borderColor:'rgba(2, 72, 200, 0.54)', backgroundColor:'rgba(2, 72, 200, 0.14)'}}>
@@ -46,7 +46,7 @@ import ContentProject from './ContentProject';
                             </div>
                             <div style={{backgroundColor:'rgba(2, 72, 200, 0.21)'}} className=' h-full w-1'></div>
                             <div className=' grow w-full  items-start  flex justify-center '>
-                                <div className=' w-full flex justify-center items-center mt-9 p-3'>
+                                <div className=' w-full flex justify-center items-center   px-3'>
                                     { 
                                     addProject ? <AddProject handlCancel={()=> setAddProject(false)} handleDeleteImage={handleDeleteImage} title={title} description={description} setTitle={setTitle} setDescription={setDescription} imagefiles={imagefiles} setImageFiles={setImageFiles} domain={'UI/UX'}/> :
                                     <>{ projects ? 

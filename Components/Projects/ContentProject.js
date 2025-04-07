@@ -8,11 +8,11 @@ import { useScreen } from '@/Hooks/useScreen'
 function ContentProject({project}) {
   const large = useScreen()
   return (
-    <div className=' w-full  border'>
-      <div className=' w-full flex justify-center'>
-        <div className={`flex justify-between ${large?'w-2/3':'w-full'}`}>
-          <p className=' text-[18px] font-bold'>{project.title}</p>
-          <div style={{borderColor:'rgba(0, 0, 0, 0.3)'}} className=' w-32 h-10 flex justify-center items-center border'>
+    <div className='w-full'>
+      <div className=' w-full flex justify-center mb-5'>
+        <div className={`flex justify-between items-center ${large?'w-2/3':'w-full'}`}>
+          <p className=' text-[21px] font-bold'>{project.title}</p>
+          <div style={{borderColor:'rgba(0, 0, 0, 0.3)'}} className=' px-7 py-1 rounded-sm flex justify-center items-center border'>
             <p style={{color:'rgba(0, 0, 0, 0.77)'}}>{project.department}</p>
           </div>
         </div>
