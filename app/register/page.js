@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import Register from '../../Components/Register/Register'
 
 function Home() {
   return (
-    <Register/>
+    <Suspense>
+      <Register/>
+    </Suspense>
   )
 }
 
