@@ -95,7 +95,7 @@ function FinalRegistration({password, repassword, handlePassword, handleSetpassw
         formData.append('username', username)
         formData.append('email', email)
         formData.append('password', password)
-        axios({url:fetchLink('user/register'), method:'POST', data:formData})
+        axios({url:fetchLink('user/register'), method:'POST', data:formData, headers:{"Content-Type":"application/json"}})
         .then((val)=>{
             console.log(val.data)
             router.push('/')
