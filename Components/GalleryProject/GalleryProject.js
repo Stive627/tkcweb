@@ -48,11 +48,11 @@ function GalleryProject({setShowGallery, images, clickIndx}) {
     <div onClick={()=> setShowGallery(false)} style={{backgroundColor:'rgba(0, 0, 0, 0.23)'}} className=' absolute top-0 left-0 right-0 bottom-0 w-full h-full '>
     <div className=' w-full h-full flex justify-center items-center'>
         <div onClick={(e)=> e.stopPropagation()} className={`${large? 'w-1/2 h-96 ':'w-full mx-2 h-80'}  border bg-white flex flex-row items-center p-2 justify-between gap-3`}>
-        {imglength > 0 ?<button onClick={()=>handleClickBack()} className={` w-10 h-10 flex justify-center items-center rounded-full ${currIndx >0 && 'bg-black ' }`}><ArrowBackIosIcon className=' relative left-1' sx={{color:'white'}}/></button>:<p></p>}
+        {imglength !==1 ?<button onClick={()=>handleClickBack()} className={` w-10 h-10 flex justify-center items-center rounded-full ${currIndx >0 && 'bg-black ' }`}><ArrowBackIosIcon className=' relative left-1' sx={{color:'white'}}/></button>:<p></p>}
         <div className={`h-full ${large? 'w-96':'w-65'} border flex flex-row overflow-hidden`}>
             {images?.map((elt, indx) => <Image ref={(node) => {imgRef.current.set(elt, node); return()=>imgRef.current.delete(elt)}} key={indx} src={fetchLink(elt.slice(7))} width={large? 385 : 265} height={400} alt={`image no${indx}`}/>)}
         </div>
-        {imglength > 0 ?<button disabled={currIndx >= imglength -1} onClick={()=> handleClick()} style={{backgroundColor:currIndx === imglength -1 ? 'rgba(217, 217, 217, 1)':'black'}} className=' w-10 h-10 flex justify-center items-center rounded-full'><ArrowForwardIosIcon className=' relative left-0.5' sx={{color:'white'}}/></button>:<p></p>}
+        {imglength !==1 ?<button disabled={currIndx >= imglength -1} onClick={()=> handleClick()} style={{backgroundColor:currIndx === imglength -1 ? 'rgba(217, 217, 217, 1)':'black'}} className=' w-10 h-10 flex justify-center items-center rounded-full'><ArrowForwardIosIcon className=' relative left-0.5' sx={{color:'white'}}/></button>:<p></p>}
         </div>
     </div>
     </div>
