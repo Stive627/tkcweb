@@ -6,6 +6,9 @@ import { useScreen } from '@/Hooks/useScreen';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import isValidatePassword from '@/Functions/isValidatePassword';
 import isValidUsername from '@/Functions/isValidUsername';
+import axios from 'axios';
+import fetchLink from '@/Functions/fetchLink';
+import { useRouter } from 'next/navigation';
 
 
 const EnterPassword = ({password, setpassword, handleNext, passwordRef}) => {
@@ -33,10 +36,11 @@ const VerifyPassword = ({repassword,password, setRepassword, repasswordRef, hand
     )
 }
 
-const UsernameUX = ({username, setUsername, usernameRef, handleNext}) => {
+const UsernameUX = ({username, setUsername, usernameRef, handleNext, err, loading}) => {
     const large = useScreen()
     return(
         <div ref={usernameRef}>
+            {err && <p className=' text-[16px] text-red-600 text-center'>{err}</p>}
             <p className=' text-[21px]'>Your username</p>
             <TkcInput className={`  my-2.5 ${large ? 'w-96':'w-72'}`} value={username} handleChange={setUsername} placeholder={'Enter your username'}/>
             <div className=' text-[10px] relative bottom-1' style={{color:'rgba(0, 0, 0, 0.78)'}}>
@@ -45,7 +49,7 @@ const UsernameUX = ({username, setUsername, usernameRef, handleNext}) => {
                   username will be @abcuiux</p>
                   </div>
             </div>
-            <div className=' flex justify-center mt-3.5'><button  onClick={()=> handleNext()} className=' text-white font-semibold w-1/3 p-2 rounded-md cursor-pointer' style={{backgroundColor:isValidUsername(username)?'rgba(7, 60, 160, 1)':'rgba(101, 137, 204, 1)'}} disabled={!isValidUsername(username)}>Finish</button></div>
+            <div className=' flex justify-center mt-3.5'><button  onClick={()=> handleNext()} className=' text-white font-semibold w-1/3 p-2 rounded-md cursor-pointer' style={{backgroundColor:isValidUsername(username)?(loading? 'rgba(101, 137, 204, 1)':'rgba(7, 60, 160, 1)'):'rgba(101, 137, 204, 1)'}} disabled={!isValidUsername(username)}>Finish</button></div>
         </div>
     )
 }
@@ -54,8 +58,11 @@ function FinalRegistration({password, repassword, handlePassword, handleSetpassw
     const passwordRef = useRef(undefined)
     const repasswordRef = useRef(undefined)
     const usernameRef = useRef(undefined)
+    const [err, setErr] = useState('')
+    const [loading, setLoading] = useState(false)
     const [currInterface, setCurrInterface] = useState(0)
     const refArr = [passwordRef,repasswordRef, usernameRef]
+    const router = useRouter()
     const large = useScreen()
     const handlePrevious = () =>{
         if(currInterface === 0){
@@ -79,6 +86,21 @@ function FinalRegistration({password, repassword, handlePassword, handleSetpassw
         })
         setCurrInterface(currInterface + 1)
     }
+    const handleFinish = (e) => {
+        e.preventDefault()
+        setLoading(true)
+        const formData = new FormData()
+        formData.append('email', email)
+        formData.append('password', password)
+        formData.append('username', username)
+        axios({url:fetchLink('user/register'), method:'POST', data:formData})
+        .then((val)=>{
+            console.log(val.data)
+            router.push('/')
+        })
+        .catch(err=> setErr(err.response.data))
+        .finally(()=> setLoading(false))
+    }
   return (
     <div className=' mt-4'>
       <div className=' flex flex-row my-3'>
@@ -91,7 +113,7 @@ function FinalRegistration({password, repassword, handlePassword, handleSetpassw
         <div className={`flex flex-row  gap-18 overflow-hidden  ${large ? 'w-96':'w-72'} `}>
             <EnterPassword passwordRef={passwordRef} password={password} setpassword={handlePassword} handleNext={handleNext}/>
             <VerifyPassword password={password} repasswordRef={repasswordRef} repassword={repassword} setRepassword={handleSetpassword} handleNext={handleNext}/>
-            <UsernameUX usernameRef={usernameRef} username={username} setUsername={handleUsername} handleNext={handleNext}/>
+            <UsernameUX usernameRef={usernameRef} username={username} setUsername={handleUsername} handleNext={handleNext} err={err} loading={loading}/>
         </div>
       </div>
     </div>
