@@ -8,7 +8,7 @@ import isValidatePassword from '@/Functions/isValidatePassword';
 import isValidUsername from '@/Functions/isValidUsername';
 import axios from 'axios';
 import fetchLink from '@/Functions/fetchLink';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 
 const EnterPassword = ({password, setpassword, handleNext, passwordRef}) => {
@@ -58,6 +58,8 @@ function FinalRegistration({password, repassword, handlePassword, handleSetpassw
     const passwordRef = useRef(undefined)
     const repasswordRef = useRef(undefined)
     const usernameRef = useRef(undefined)
+    const params = useSearchParams()
+    const email = params.get('email')
     const [err, setErr] = useState('')
     const [loading, setLoading] = useState(false)
     const [currInterface, setCurrInterface] = useState(0)
