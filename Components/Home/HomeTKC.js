@@ -13,11 +13,17 @@ function HOmeTKC() {
   const [section, setSection] = useState(undefined)
   const [showAvatar, setShowAvatar] = useState(false)
   const [snippets, setSnippets] = useState(undefined)
+  const [projects, setProjects] = useState(undefined)
   useEffect(() => {
       axios({url:fetchLink('snippet/'), method:'GET', headers:{"Content-Type":"application/json"}})
       .then((value) => {setSnippets(value.data); console.log(value.data)})
       .catch(err => console.log(err))
   },[])
+  useEffect(() => {
+    axios({url:fetchLink('project/'), method:'GET', headers:{"Content-Type":"application/json"}})
+    .then((value) => {setProjects(value.data); console.log(value.data)})
+    .catch(err => console.log(err))
+},[])
   const large = useScreen()
   return (
     <div onClick={()=>{if(showAvatar){setShowAvatar(false)}else{return;}}} className=' w-screen flex justify-center '>
@@ -41,7 +47,7 @@ function HOmeTKC() {
             <hr className={`${section === 1 ? 'w-16' : 'w-27'} ${section === 1 && 'scrollgo'} ${section === 0 && 'scrollback'}`}/>
           </div>
         </div>
-        <Content section={section} snippets={snippets} setSnippets={setSnippets}/>
+        <Content section={section} snippets={snippets} setSnippets={setSnippets} projects={projects} setProjects={setProjects}/>
       </div>
     </div>
   )
