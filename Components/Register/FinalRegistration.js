@@ -36,7 +36,7 @@ const VerifyPassword = ({repassword,password, setRepassword, repasswordRef, hand
     )
 }
 
-const UsernameUX = ({username, setUsername, usernameRef, handleNext, err, loading}) => {
+const UsernameUX = ({username, setUsername, usernameRef, handleFinish, err, loading}) => {
     const large = useScreen()
     return(
         <div ref={usernameRef}>
@@ -49,7 +49,7 @@ const UsernameUX = ({username, setUsername, usernameRef, handleNext, err, loadin
                   username will be @abcuiux</p>
                   </div>
             </div>
-            <div className=' flex justify-center mt-3.5'><button  onClick={()=> handleNext()} className=' text-white font-semibold w-1/3 p-2 rounded-md cursor-pointer' style={{backgroundColor:isValidUsername(username)?(loading? 'rgba(101, 137, 204, 1)':'rgba(7, 60, 160, 1)'):'rgba(101, 137, 204, 1)'}} disabled={!isValidUsername(username)}>Finish</button></div>
+            <div className=' flex justify-center mt-3.5'><button  onClick={()=> handleFinish()} className=' text-white font-semibold w-1/3 p-2 rounded-md cursor-pointer' style={{backgroundColor:isValidUsername(username)?(loading? 'rgba(101, 137, 204, 1)':'rgba(7, 60, 160, 1)'):'rgba(101, 137, 204, 1)'}} disabled={!isValidUsername(username)}>Finish</button></div>
         </div>
     )
 }
@@ -113,7 +113,7 @@ function FinalRegistration({password, repassword, handlePassword, handleSetpassw
         <div className={`flex flex-row  gap-18 overflow-hidden  ${large ? 'w-96':'w-72'} `}>
             <EnterPassword passwordRef={passwordRef} password={password} setpassword={handlePassword} handleNext={handleNext}/>
             <VerifyPassword password={password} repasswordRef={repasswordRef} repassword={repassword} setRepassword={handleSetpassword} handleNext={handleNext}/>
-            <UsernameUX usernameRef={usernameRef} username={username} setUsername={handleUsername} handleNext={handleNext} err={err} loading={loading}/>
+            <UsernameUX usernameRef={usernameRef} username={username} setUsername={handleUsername} handleFinish={handleFinish} err={err} loading={loading}/>
         </div>
       </div>
     </div>
