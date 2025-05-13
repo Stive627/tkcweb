@@ -1,39 +1,33 @@
 import { useScreen } from '@/Hooks/useScreen'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import SwitchAccessShortcutIcon from '@mui/icons-material/SwitchAccessShortcut';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import axios from 'axios';
-import fetchLink from '@/Functions/fetchLink';
+
+import useAuth from '@/Hooks/useAuth';
 
 function Avatar({handleShow, show}) {
-    const [profile, setProfile] = useState({username:'', email:''})
-    useEffect(() => {
-        const token = localStorage.getItem('tkc_token')
-        axios({url:fetchLink('user/connect'), method:'GET', headers:{"Content-Type":"application/json", Authorization:`${token}`}})
-        .then((value)=> {setProfile({username:value.data.data.username, email:value.data.data.email}); console.log(value.data.data)})
-        .catch(err => {console.log(err.response); setProfile(err.response.data.authenticated)})
-    },[])
+    const large = useScreen()
+    const {username, email} = useAuth()
     const handleLogout = ()=>{
         localStorage.removeItem('tkc_token')
         if(typeof window !== 'undefined'){
             window.location.reload()
         }
     }
-    const large = useScreen()
   return (
-    <div className=' relative' onClick={(e)=> e.stopPropagation()}>
+    <div className='relative' onClick={(e)=> e.stopPropagation()}>
       <button onClick={()=> handleShow()} className={`${large? 'w-11 h-11':'w-8 h-8'} flex items-center justify-center border-2 rounded-full`} style={{borderColor:'rgba(85, 17, 168, 0.95)', backgroundColor:'rgba(85, 17, 168, 0.07)', color:'rgba(85, 17, 168, 1)'}}>
               <p>S</p>
         </button>
-    {show && <div style={{borderColor:'rgba(0, 0, 0, 0.22)'}} className={`border-2 rounded-lg bg-white absolute  divide-gray-200 cursor-pointer flex flex-col divide-y w-62 h-52 ${large? 'left-13 -top-0':'right-1 top-10'}`}>
+    {show && <div style={{borderColor:'rgba(0, 0, 0, 0.22)'}} className={`border-2 rounded-lg bg-white  absolute  divide-gray-200 cursor-pointer flex flex-col divide-y w-62 h-52 ${large? 'left-13 -top-0':'right-1 top-10'}`}>
                 <div className=' p-2 w-full flex flex-row items-center gap-3'>
                     <button className={`${large? 'w-8 h-8':'w-7 h-7'} flex items-center justify-center border-2 rounded-full`} style={{borderColor:'rgba(85, 17, 168, 0.95)', backgroundColor:'rgba(85, 17, 168, 0.07)', color:'rgba(85, 17, 168, 1)'}}><p>S</p></button>
                     <div>
-                        <p className=' font-bold text-[15px]'>{profile.email}</p>
-                        <p className='text-[15px] relative bottom-1'>{profile.username}</p>
+                        <p className=' font-bold text-[15px]'>{email}</p>
+                        <p className='text-[15px] relative bottom-1'>{username}</p>
                     </div>
                 </div>
                 <button className=' flex justify-between flex-row py-1 px-2 items-center'>

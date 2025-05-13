@@ -6,32 +6,31 @@ import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRou
 import AddProject from './AddProject';
 import axios from 'axios';
 import ContentProject from './ContentProject';
+import useAuth from '@/Hooks/useAuth';
+import getDepartment from '@/Functions/getDepartment';
 
     function Project({projects, setProjects}) {
         const [addProject, setAddProject] = useState(false)
-        const [title, setTitle] = useState('')
-        const [description, setDescription] = useState('')
-        const [imagefiles, setImageFiles] = useState([])
+        const [proj, setProj] = useState({title:'', description:'', img:[]})
         const [indxProject, setIndxProject] = useState(0)
+        const {username} = useAuth()
+        const department = getDepartment(username)
         const large = useScreen()
+        console.log(projects)
         function handleDeleteImage(indx){
-            const indexedImg = imagefiles[indx]
-            const newImgs = imagefiles.filter(img => img !== indexedImg)
+            const indexedImg = proj.img[indx]
+            const newImgs = proj.img.filter(img => img !== indexedImg)
             setImageFiles(newImgs)
         }
-        const handleSubmit = () => {
-            const formdatawimg = new FormData()
-            formdatawimg.append('title', title)
-            formdatawimg.append('description', description)
-            formdatawimg.append('department', 'UI/UX')
-    
+        const handleSubmit = (e) => {
+            e.preventDefault()
             const formdata = new FormData()
-            formdata.append('title', title)
-            formdata.append('description', description)
-            formdata.append('department', 'UI/UX')
-            formdata.append('image', imgfile)
-            axios({url:fetchLink('snippet/add'), data:imgfile? formdata : formdatawimg, method:'POST', headers:{"Content-Type":"application/json"}})
-            .then((value) => console.log(value.data))
+            formdata.append('title', proj.title)
+            formdata.append('description', proj.description)
+            formdata.append('department', department)
+            formdata.append('images', proj.img)
+            axios({url:fetchLink('project/add'), data:formdata, method:'POST'})
+            .then((value) => setProjects(projects? [...projects, ...value.data]: [{...value.data}]))
             .catch((error) => console.log(error))
         }
             return (
@@ -48,7 +47,7 @@ import ContentProject from './ContentProject';
                             <div className=' grow w-full  items-start  flex justify-center '>
                                 <div className=' w-full flex justify-center items-center   px-3'>
                                     { 
-                                    addProject ? <AddProject handlCancel={()=> setAddProject(false)} handleDeleteImage={handleDeleteImage} title={title} description={description} setTitle={setTitle} setDescription={setDescription} imagefiles={imagefiles} setImageFiles={setImageFiles} domain={'UI/UX'}/> :
+                                    addProject ? <AddProject handlCancel={()=> setAddProject(false)} handleDeleteImage={handleDeleteImage} domain={department} proj={proj} setProj={setProj} handlSubmit={handleSubmit}/> :
                                     <>{ projects ? 
                                         <ContentProject project={projects[indxProject]}/> :
                                         <>
@@ -63,7 +62,7 @@ import ContentProject from './ContentProject';
                         </div>:
                         <div>
                             { 
-                            addProject ? <AddProject handlCancel={()=> setAddProject(false)} handleDeleteImage={handleDeleteImage}  title={title} description={description} setTitle={setTitle} setDescription={setDescription} imagefiles={imagefiles} setImageFiles={setImageFiles} domain={'UI/UX'}/> :
+                            addProject ? <AddProject handlCancel={()=> setAddProject(false)} handleDeleteImage={handleDeleteImage}  proj={proj} setProj={setProj} domain={department}  handlSubmit={handleSubmit}/> :
                                 <> 
                                 { projects ? 
                                 <ContentProject project={projects[indxProject]}/> :

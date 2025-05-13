@@ -1,26 +1,28 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import { useScreen } from '@/Hooks/useScreen'
 import Image from 'next/image'
 import fetchLink from '@/Functions/fetchLink'
 import AddSnippetTips from './AddSnipetTips'
 import axios from 'axios'
 import ContentSnippet from './ContentSnippet'
+import useAuth from '@/Hooks/useAuth'
+import getDepartment from '@/Functions/getDepartment'
 
 function SnippetsTips({snippets, setSnippets}) {
     const [addtips, setAddtips] = useState(false)
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [imgfile, setImgFile] = useState(undefined)
+    const [snip, setSnip] = useState({title:'', description:'', imgfile:undefined})
     const large = useScreen()
+    const {username} = useAuth()
+    const department = getDepartment(username)
     const handleAddTips = () => setAddtips(true)
     const handleSubmit = () => {
         const formdata = new FormData()
-        formdata.append('title', title)
-        formdata.append('description', description)
-        formdata.append('department', 'UI/UX')
-        formdata.append('image', imgfile[0])
+        formdata.append('title', snip.title)
+        formdata.append('description', snip.description)
+        formdata.append('department', department)
+        formdata.append('image', snip.imgfile[0])
         axios({url:fetchLink('snippet/add'), data:formdata, method:'POST'})
-        .then((value) => {console.log(value.data); console.log(imgfile[0]); setAddtips(false); setSnippets(snippets? [...snippets, {title:title, description:description, image:imgfile}] : [{title:title, description:description, image:imgfile}]); setTitle(''); setDescription(''); setImgFile(undefined)})
+        .then((value) => {console.log(value.data); setAddtips(false); setSnippets([...snippets, value.data]);})
         .catch((error) => console.log(error))
     }
     const handleDeleteSnippet = (id) => {
@@ -35,13 +37,13 @@ function SnippetsTips({snippets, setSnippets}) {
         })
         .catch(err => {console.error(err); console.log('err')})
     }
-
-  if(snippets?.length === 0 || !snippets){ 
+  if(!snippets) return <div className='h-96 w-40 flex justify-center items-center'><div className=' w-10 h-10 border border-blue-500 border-t-white rounded-full'></div></div>  
+  if(snippets?.length === 0){ 
     return (
             <div className={`mt-4  h-96 flex justify-center items-center ${!large && 'ml-2'}`}>
                 { 
                 addtips?
-                    <AddSnippetTips handleSubmit={handleSubmit} handleDeleteImage={() => setImgFile(undefined)} handlCancel={()=>setAddtips(false)} title={title} description={description} imgfile={imgfile} setTitle={setTitle} setDescription={setDescription} setImgFile={setImgFile} domain={'UI/UX'}/>:
+                    <AddSnippetTips handleSubmit={handleSubmit} handleDeleteImage={() => setImgFile(undefined)} handlCancel={()=>{setAddtips(false); setSnip({title:'', description:'', imgfile:undefined})}} snip={snip}  domain={department} setSnip={setSnip}/>:
                     <div>
                         <div className=' flex justify-center'><Image src={fetchLink('esnippet.png')} width={250} height={250} alt='empty snippet'/></div>
                         <p>No Snippets or tips. Click here to <span className=' underline cursor-pointer' onClick={()=>setAddtips(true)}  style={{color:'rgba(2, 72, 200, 1)'}}>add</span></p>
@@ -50,7 +52,8 @@ function SnippetsTips({snippets, setSnippets}) {
         </div>
     )
  }
- if(addtips) return <AddSnippetTips handleSubmit={handleSubmit} handleDeleteImage={() => setImgFile(undefined)} handlCancel={()=>{setAddtips(false); setTitle(''); setDescription(''); setImgFile(undefined)}} title={title} description={description} imgfile={imgfile} setTitle={setTitle} setDescription={setDescription} setImgFile={setImgFile} domain={'UI/UX'}/>
+ 
+ if(addtips) return <AddSnippetTips handleSubmit={handleSubmit} handleDeleteImage={() => setImgFile(undefined)} handlCancel={()=>{setAddtips(false); setSnip({title:'', description:'', imgfile:undefined})}} snip={snip}  domain={department} setSnip={setSnip}/>
  return <ContentSnippet handleAddTips={handleAddTips} tips={snippets} handleDeleteTips={handleDeleteSnippet}/>
 }
 

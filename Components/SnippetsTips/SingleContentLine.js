@@ -23,7 +23,7 @@ function SingleContentLine({indx, handlOpen, openTip, elt, setOpenTip, handleDel
           <div className={`border border-gray-50 `}>
               <p>{elt.description}</p>
           </div>
-          {elt.image !== 'undefined' && elt.image && <div className=' flex justify-center'><Image onClick={(e)=> { e.stopPropagation(); setShowGallery(true)}} src={typeof elt.image === 'string' ? fetchLink(elt.image.slice(6)) : URL.createObjectURL(elt.image[0])} width={200} height={200} alt={`Snippet image no${indx}`}/></div>} 
+          <div className=' flex justify-center'><Image onClick={(e)=> { e.stopPropagation(); setShowGallery(true)}} src={fetchLink(elt.image.slice(6))} width={200} height={200} alt={`Snippet image no${indx}`}/></div>
       </div>
       {showGallery && <GalleryProject setShowGallery={setShowGallery} clickIndx={0} images={[elt.image]}/>}
     </div>
