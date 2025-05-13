@@ -30,7 +30,7 @@ function HOmeTKC() {
       <div className={`${large ? 'w-1/2 mt-5': 'w-full pr-2.5 mt-2'}  h-full`}>
         <div className={`flex flex-row justify-between`}>
           <div className=' flex flex-row  items-center'>
-              <Image src={fetchLink('logo.png')} width={80} height={80} alt='logo tkc'/>
+              <Image src={'https://bucket-tkc.s3.ap-south-1.amazonaws.com/logo.png'} width={80} height={80} alt='logo tkc'/>
               <p className={`font-semibold ${large ? 'text-[20px]':'text-[17px] top-1'} relative right-1 `}>TSA Knowledge Center</p>
           </div>
           <div className=' flex flex-row gap-2 items-center'>

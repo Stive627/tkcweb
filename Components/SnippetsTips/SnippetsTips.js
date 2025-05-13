@@ -45,7 +45,7 @@ function SnippetsTips({snippets, setSnippets}) {
                 addtips?
                     <AddSnippetTips handleSubmit={handleSubmit} handleDeleteImage={() => setImgFile(undefined)} handlCancel={()=>{setAddtips(false); setSnip({title:'', description:'', imgfile:undefined})}} snip={snip}  domain={department} setSnip={setSnip}/>:
                     <div>
-                        <div className=' flex justify-center'><Image src={fetchLink('esnippet.png')} width={250} height={250} alt='empty snippet'/></div>
+                        <div className=' flex justify-center'><Image src={'https://bucket-tkc.s3.ap-south-1.amazonaws.com/esnippet.png'} width={250} height={250} alt='empty snippet'/></div>
                         <p>No Snippets or tips. Click here to <span className=' underline cursor-pointer' onClick={()=>setAddtips(true)}  style={{color:'rgba(2, 72, 200, 1)'}}>add</span></p>
                     </div>
                 }

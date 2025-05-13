@@ -48,12 +48,12 @@ import getDepartment from '@/Functions/getDepartment';
                                 <div className=' w-full flex justify-center items-center   px-3'>
                                     { 
                                     addProject ? <AddProject handlCancel={()=> setAddProject(false)} handleDeleteImage={handleDeleteImage} domain={department} proj={proj} setProj={setProj} handlSubmit={handleSubmit}/> :
-                                    <>{ projects ? 
+                                    <>{ projects?.length>0 ? 
                                         <ContentProject project={projects[indxProject]}/> :
-                                        <>
-                                            <div className=' flex justify-center '><Image src={fetchLink('eproject.png')}  width={200} height={200} alt='empty project'/></div>
+                                        <div className=' flex flex-col gap-4'>
+                                            <div className=' flex justify-center '><Image src={'https://bucket-tkc.s3.ap-south-1.amazonaws.com/eproject.png'}  width={200} height={200} alt='empty project'/></div>
                                             <p>No Snippets or tips. Click here to <span className=' underline cursor-pointer' onClick={()=>setAddProject(true)}  style={{color:'rgba(2, 72, 200, 1)'}}>add</span></p>
-                                        </>
+                                        </div>
                                     }
                                     </>
                                     }
@@ -64,7 +64,7 @@ import getDepartment from '@/Functions/getDepartment';
                             { 
                             addProject ? <AddProject handlCancel={()=> setAddProject(false)} handleDeleteImage={handleDeleteImage}  proj={proj} setProj={setProj} domain={department}  handlSubmit={handleSubmit}/> :
                                 <> 
-                                { projects ? 
+                                { projects?.length > 0 ? 
                                 <ContentProject project={projects[indxProject]}/> :
                                 <>
                                     <p className=' px-3  mt-8 text-blue-700 text-[16px]'><AddCircleOutlineRoundedIcon style={{fontWeight:'bold', }} sx={{fontSize:30}}/> Add New project</p>

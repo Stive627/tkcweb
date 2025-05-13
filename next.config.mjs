@@ -9,6 +9,13 @@ const nextConfig = {
           pathname: '/**',
           search: '',
         },
+        {
+          protocol:'https',
+          hostname:'bucket-tkc.s3.ap-south-1.amazonaws.com',
+          port:'',
+          pathname:'/**',
+          search:''
+        }
       ],
     },
 };
