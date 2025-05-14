@@ -43,7 +43,7 @@ import { useData } from '@/Hooks/useDataContext';
                         <div className = 'flex flex-row w-full gap-1 mt-10' style={{height:'700px'}}>
                             <div className=' flex flex-col gap-3'>
                                 {projects?.map((elt, indx) => <Image key={indx} onClick={()=> setIndxProject(indx)} src={elt.images[0]} alt={`project no${indx+1}`} width={80} height={80} style={{borderStyle:'dashed', borderColor:'rgba(2, 72, 200, 0.54)'}} className={`w-20 h-20 ${indxProject === indx && 'border border-black'}`}/>)}
-                                <button onClick={()=> setAddProject(true)} className=' w-20 h-20 border flex justify-center items-center cursor-pointer' style={{borderStyle:'dashed', borderColor:'rgba(2, 72, 200, 0.54)', backgroundColor:'rgba(2, 72, 200, 0.14)'}}>
+                                <button type='button' onClick={()=> setAddProject(true)} className=' w-20 h-20 border flex justify-center items-center cursor-pointer' style={{borderStyle:'dashed', borderColor:'rgba(2, 72, 200, 0.54)', backgroundColor:'rgba(2, 72, 200, 0.14)'}}>
                                     <p className='text-[16px]' style={{color:'rgba(34, 13, 215, 1)'}}>Add</p>
                                 </button>
                             </div>
