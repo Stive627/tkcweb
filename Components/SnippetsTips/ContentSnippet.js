@@ -2,17 +2,19 @@ import React, { useState } from 'react'
 import SingleContentLine from './SingleContentLine'
 import { useScreen } from '@/Hooks/useScreen'
 import AddIcon from '@mui/icons-material/Add';
+import { useData } from '@/Hooks/useDataContext';
 
-function ContentSnippet({tips, handleAddTips, handleDeleteTips}) {
+function ContentSnippet({handleAddTips}) {
     const [openTip, setOpenTip] = useState('')
     const handleOpen = (indx) => setOpenTip(indx)
+    const {snippets} = useData()
     const large = useScreen()
   return (
       <div style={{height:large?'780px':'530px', }} className=' w-full flex justify-center snippetscroll'>
         <div className={`${large? 'w-2/3':'w-full'}`}>
           <div className={`mt-7 flex flex-col gap-3 divide-y divide-gray-300 ml-3 `}>
             {
-              tips.map((elt, indx) => <SingleContentLine key={indx} elt={elt} indx={indx} handlOpen={handleOpen} openTip={openTip} setOpenTip={setOpenTip} handleDeleteTips={handleDeleteTips}/>)
+              snippets.map((elt, indx) => <SingleContentLine key={indx} elt={elt} indx={indx} handlOpen={handleOpen} openTip={openTip} setOpenTip={setOpenTip}/>)
             }
           </div>
      

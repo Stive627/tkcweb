@@ -4,8 +4,10 @@ import './snippet.css'
 import fetchLink from '@/Functions/fetchLink'
 import CloseIcon from '@mui/icons-material/Close';
 import GalleryProject from '../GalleryProject/GalleryProject';
+import { useData } from '@/Hooks/useDataContext';
 
-function SingleContentLine({indx, handlOpen, openTip, elt, setOpenTip, handleDeleteTips}) {
+function SingleContentLine({indx, handlOpen, openTip, elt, setOpenTip}) {
+  const {deleteSnippet} = useData()
   const [show, setShow] = useState('false')
   const [showGallery, setShowGallery] = useState(false)
   return (
@@ -16,14 +18,14 @@ function SingleContentLine({indx, handlOpen, openTip, elt, setOpenTip, handleDel
           <p className='text-[16px]'>{elt.title}</p>
         </div>
         {indx === openTip && <div className=' flex flex-row'>
-          <button onClick={()=> handleDeleteTips(elt._id)} className=' text-red-600'><CloseIcon/></button>
+          <button onClick={()=> deleteSnippet(elt._id, indx)} className=' text-red-600'><CloseIcon/></button>
           </div>}
       </div>
       <div className={`${(indx === openTip) ? 'show':'hidden'}`}>
           <div className={`border border-gray-50 `}>
               <p>{elt.description}</p>
           </div>
-          <div className=' flex justify-center'><Image onClick={(e)=> { e.stopPropagation(); setShowGallery(true)}} src={fetchLink(elt.image.slice(6))} width={200} height={200} alt={`Snippet image no${indx}`}/></div>
+          {elt.image && <div className=' flex justify-center'><Image onClick={(e)=> { e.stopPropagation(); setShowGallery(true)}} src={elt.image} width={200} height={200} alt={`Snippet image no${indx}`}/></div>}
       </div>
       {showGallery && <GalleryProject setShowGallery={setShowGallery} clickIndx={0} images={[elt.image]}/>}
     </div>

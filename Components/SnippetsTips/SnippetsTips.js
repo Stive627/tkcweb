@@ -22,13 +22,12 @@ function SnippetsTips() {
         formdata.append('title', snip.title)
         formdata.append('description', snip.description)
         formdata.append('department', department)
-        formdata.append('image', snip.imgfile[0])
+        formdata.append('image', snip.imgfile? snip.imgfile[0] : undefined)
         axios({url:fetchLink('snippet/add'), data:formdata, method:'POST'})
         .then((value) => {setAddtips(false); addSnippet(value.data);})
         .catch((error) => console.log(error))
     }
     const handleDeleteSnippet = (id) => {
-        console.log('clicked')
         axios({url:fetchLink(`snippet/delete/${id}`),method:'DELETE'}).then((val) => {
             const newSnippet = [...snippets]
             const updatedSnippet = newSnippet.filter(elt => elt._id !== id)
@@ -43,7 +42,7 @@ function SnippetsTips() {
             <div className={`mt-4  h-96 flex justify-center items-center ${!large && 'ml-2'}`}>
                 { 
                 addtips?
-                    <AddSnippetTips handleSubmit={handleSubmit} handleDeleteImage={() => setImgFile(undefined)} handlCancel={()=>{setAddtips(false); setSnip({title:'', description:'', imgfile:undefined})}} snip={snip}  domain={department} setSnip={setSnip}/>:
+                    <AddSnippetTips handleSubmit={handleSubmit} handleDeleteImage={() => setSnip({...snip, imgfile:undefined})} handlCancel={()=>{setAddtips(false); setSnip({title:'', description:'', imgfile:undefined})}} snip={snip}  domain={department} setSnip={setSnip}/>:
                     <div>
                         <div className=' flex justify-center'><Image src={'https://bucket-tkc.s3.ap-south-1.amazonaws.com/esnippet.png'} width={250} height={250} alt='empty snippet'/></div>
                         <p>No Snippets or tips. Click here to <span className=' underline cursor-pointer' onClick={()=>setAddtips(true)}  style={{color:'rgba(2, 72, 200, 1)'}}>add</span></p>
@@ -53,8 +52,8 @@ function SnippetsTips() {
     )
  }
  
- if(addtips) return <AddSnippetTips handleSubmit={handleSubmit} handleDeleteImage={() => setImgFile(undefined)} handlCancel={()=>{setAddtips(false); setSnip({title:'', description:'', imgfile:undefined})}} snip={snip}  domain={department} setSnip={setSnip}/>
- return <ContentSnippet handleAddTips={handleAddTips} tips={snippets} handleDeleteTips={handleDeleteSnippet}/>
+ if(addtips) return <AddSnippetTips handleSubmit={handleSubmit} handleDeleteImage={() => setSnip({...snip, imgfile:undefined})} handlCancel={()=>{setAddtips(false); setSnip({title:'', description:'', imgfile:undefined})}} snip={snip}  domain={department} setSnip={setSnip}/>
+ return <ContentSnippet handleAddTips={handleAddTips}/>
 }
 
 export default SnippetsTips
