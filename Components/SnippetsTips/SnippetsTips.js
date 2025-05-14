@@ -7,8 +7,10 @@ import axios from 'axios'
 import ContentSnippet from './ContentSnippet'
 import useAuth from '@/Hooks/useAuth'
 import getDepartment from '@/Functions/getDepartment'
+import { useData } from '@/Hooks/useDataContext'
 
-function SnippetsTips({snippets, setSnippets}) {
+function SnippetsTips() {
+    const {snippets, addSnippet, deleteSnippet} = useData()
     const [addtips, setAddtips] = useState(false)
     const [snip, setSnip] = useState({title:'', description:'', imgfile:undefined})
     const large = useScreen()
@@ -22,22 +24,20 @@ function SnippetsTips({snippets, setSnippets}) {
         formdata.append('department', department)
         formdata.append('image', snip.imgfile[0])
         axios({url:fetchLink('snippet/add'), data:formdata, method:'POST'})
-        .then((value) => {console.log(value.data); setAddtips(false); setSnippets([...snippets, value.data]);})
+        .then((value) => {setAddtips(false); addSnippet(value.data);})
         .catch((error) => console.log(error))
     }
     const handleDeleteSnippet = (id) => {
         console.log('clicked')
         axios({url:fetchLink(`snippet/delete/${id}`),method:'DELETE'}).then((val) => {
-            console.log('done')
-            console.log(val.data)
             const newSnippet = [...snippets]
             const updatedSnippet = newSnippet.filter(elt => elt._id !== id)
             console.log(updatedSnippet)
-            setSnippets(updatedSnippet)
+            deleteSnippet(updatedSnippet)
         })
         .catch(err => {console.error(err); console.log('err')})
     }
-  if(!snippets) return <div className='h-96 w-40 flex justify-center items-center'><div className=' w-10 h-10 border border-blue-500 border-t-white rounded-full'></div></div>  
+  if(snippets=== undefined) return <div className='h-96 w-40 flex justify-center items-center'><div className=' w-10 h-10 border border-blue-500 animate-spin border-t-white rounded-full'></div></div>  
   if(snippets?.length === 0){ 
     return (
             <div className={`mt-4  h-96 flex justify-center items-center ${!large && 'ml-2'}`}>

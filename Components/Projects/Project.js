@@ -8,9 +8,11 @@ import axios from 'axios';
 import ContentProject from './ContentProject';
 import useAuth from '@/Hooks/useAuth';
 import getDepartment from '@/Functions/getDepartment';
+import { useData } from '@/Hooks/useDataContext';
 
-    function Project({projects, setProjects}) {
-        const [addProject, setAddProject] = useState(false)
+    function Project() {
+        const {projects, addProject} = useData()
+        const [addProj, setAddProject] = useState(false)
         const [proj, setProj] = useState({title:'', description:'', img:[]})
         const [indxProject, setIndxProject] = useState(0)
         const {username} = useAuth()
@@ -30,7 +32,7 @@ import getDepartment from '@/Functions/getDepartment';
             formdata.append('department', department)
             formdata.append('images', proj.img)
             axios({url:fetchLink('project/add'), data:formdata, method:'POST'})
-            .then((value) => setProjects(projects? [...projects, ...value.data]: [{...value.data}]))
+            .then((value) => addProject(value.data))
             .catch((error) => console.log(error))
         }
             return (
@@ -47,8 +49,8 @@ import getDepartment from '@/Functions/getDepartment';
                             <div className=' grow w-full  items-start  flex justify-center '>
                                 <div className=' w-full flex justify-center items-center   px-3'>
                                     { 
-                                    addProject ? <AddProject handlCancel={()=> setAddProject(false)} handleDeleteImage={handleDeleteImage} domain={department} proj={proj} setProj={setProj} handlSubmit={handleSubmit}/> :
-                                    <>{ projects?.length>0 ? 
+                                    addProj ? <AddProject handlCancel={()=> setAddProject(false)} handleDeleteImage={handleDeleteImage} domain={department} proj={proj} setProj={setProj} handlSubmit={handleSubmit}/> :
+                                    <>{ projects.length>0 ? 
                                         <ContentProject project={projects[indxProject]}/> :
                                         <div className=' flex flex-col gap-4'>
                                             <div className=' flex justify-center '><Image src={'https://bucket-tkc.s3.ap-south-1.amazonaws.com/eproject.png'}  width={200} height={200} alt='empty project'/></div>
@@ -62,7 +64,7 @@ import getDepartment from '@/Functions/getDepartment';
                         </div>:
                         <div>
                             { 
-                            addProject ? <AddProject handlCancel={()=> setAddProject(false)} handleDeleteImage={handleDeleteImage}  proj={proj} setProj={setProj} domain={department}  handlSubmit={handleSubmit}/> :
+                            addProj ? <AddProject handlCancel={()=> setAddProject(false)} handleDeleteImage={handleDeleteImage}  proj={proj} setProj={setProj} domain={department}  handlSubmit={handleSubmit}/> :
                                 <> 
                                 { projects?.length > 0 ? 
                                 <ContentProject project={projects[indxProject]}/> :

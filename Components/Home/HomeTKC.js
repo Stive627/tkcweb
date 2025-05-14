@@ -1,4 +1,3 @@
-"use client"
 import fetchLink from '@/Functions/fetchLink'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import Image from 'next/image'
@@ -8,23 +7,25 @@ import { useScreen } from '@/Hooks/useScreen';
 import Content from './Content';
 import Avatar from '../Avatar/Avatar';
 import axios from 'axios';
+import { useData } from '@/Hooks/useDataContext';
 
 function HOmeTKC() {
   const [section, setSection] = useState(undefined)
   const [showAvatar, setShowAvatar] = useState(false)
-  const [snippets, setSnippets] = useState(undefined)
-  const [projects, setProjects] = useState(undefined)
+  const {loadSnippet, loadProject} = useData()
   useEffect(() => {
       axios({url:fetchLink('snippet/'), method:'GET', headers:{"Content-Type":"application/json"}})
-      .then((value) => {setSnippets(value.data); console.log(value.data)})
+      .then((value) => loadSnippet(value.data))
       .catch(err => console.log(err))
   },[])
   useEffect(() => {
     axios({url:fetchLink('project/'), method:'GET', headers:{"Content-Type":"application/json"}})
-    .then((value) => {setProjects(value.data); console.log(value.data)})
+    .then((value) => loadProject(value.data))
     .catch(err => console.log(err))
 },[])
+
   const large = useScreen()
+
   return (
     <div onClick={()=>{if(showAvatar){setShowAvatar(false)}else{return;}}} className=' w-screen flex justify-center '>
       <div className={`${large ? 'w-1/2 mt-5': 'w-full pr-2.5 mt-2'}  h-full`}>
@@ -47,7 +48,7 @@ function HOmeTKC() {
             <hr className={`${section === 1 ? 'w-16' : 'w-27'} ${section === 1 && 'scrollgo'} ${section === 0 && 'scrollback'}`}/>
           </div>
         </div>
-        <Content section={section} snippets={snippets} setSnippets={setSnippets} projects={projects} setProjects={setProjects}/>
+        <Content section={section}/>
       </div>
     </div>
   )

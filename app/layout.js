@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Head from "next/head";
 import Script from "next/script";
+import { DataProvider } from "@/Hooks/useDataContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <DataProvider>
+          {children}
+        </DataProvider>
         
       </body>
     <Script async src="https://www.googletagmanager.com/gtag/js?id=G-NL79XF77P3"></Script>

@@ -1,11 +1,11 @@
 import Project from "../Projects/Project";
 import SnippetsTips from "../SnippetsTips/SnippetsTips";
 
-export default function Content({section, snippets, setSnippets, projects, setProjects}){
+export default function Content({section}){
     switch(section){
         case 1:
-            return <Project projects={projects} setProjects={setProjects}/>
+            return <Project/>
         default:
-            return <SnippetsTips setSnippets={setSnippets} snippets={snippets}/>
+            return <SnippetsTips/>
     }
 }
