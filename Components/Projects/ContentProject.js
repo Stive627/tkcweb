@@ -26,7 +26,7 @@ function ContentProject({project}) {
             project.images.map((elt, indx) =>(
               <div key={indx}>
                 <p className=' text-[16px] mb-1'>{getImgName(elt)}</p>
-                <Image onClick={()=> setShowGallery({status:true, imgIndx:indx})} src={fetchLink(elt.slice(6))} width={500} height={500} alt={`image of project ${elt.title} no${indx+1}`}/>
+                <Image onClick={()=> setShowGallery({status:true, imgIndx:indx})} src={elt} width={500} height={500} alt={`image of project ${elt.title} no${indx+1}`}/>
               </div>
             ))
           }
