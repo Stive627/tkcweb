@@ -70,7 +70,7 @@ import { useData } from '@/Hooks/useDataContext';
                                 <ContentProject project={projects[indxProject]}/> :
                                 <>
                                     <p className=' px-3  mt-8 text-blue-700 text-[16px]'><AddCircleOutlineRoundedIcon style={{fontWeight:'bold', }} sx={{fontSize:30}}/> Add New project</p>
-                                    <div className=' flex justify-center mt-15'><Image src={fetchLink('eproject.png')}  width={200} height={200} alt='empty project'/></div>
+                                    <div className=' flex justify-center mt-15'><Image src={'https://bucket-tkc.s3.ap-south-1.amazonaws.com/eproject.png'}  width={200} height={200} alt='empty project'/></div>
                                     <p className=' text-center'>No Snippets or tips. Click here to <span className=' underline cursor-pointer' onClick={()=>setAddProject(true)}  style={{color:'rgba(2, 72, 200, 1)'}}>add</span></p>
                                 </>}
                                 </>

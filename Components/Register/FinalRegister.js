@@ -1,5 +1,4 @@
 "use client"
-import fetchLink from '@/Functions/fetchLink'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { useScreen } from '@/Hooks/useScreen'
