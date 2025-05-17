@@ -32,7 +32,7 @@ function Register() {
     }
   return (
     <div className=' flex w-full justify-center'>
-        <div className={`mt-10 ${large && 'w-1/4'}`}>
+        <div className={`mt-10  w-full lg:w-1/4`}>
           <div className=' flex justify-center'>
               <div className=' flex flex-row gap-1.5 items-center'>
                   <Image src={'https://bucket-tkc.s3.ap-south-1.amazonaws.com/logo.png'} width={100} height={100} alt='logo'/>

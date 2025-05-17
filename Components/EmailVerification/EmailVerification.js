@@ -82,7 +82,7 @@ function EmailVerification() {
               <div className=''>
                 {err &&<p className=' text-center text-red-600'>{err}</p>}
                 <p className=' text-[21px] ' style={{width:large?'450px':'350px'}}>Your username</p>
-                <TkcInput className={'w-3/4 my-3 '} value={username} handleChange={setUsername} placeholder={'Enter the username'}/>
+                <TkcInput name={'username'} autocomplete={'username'} type={'text'} className={'w-3/4 my-3 '} value={username} handleChange={setUsername} placeholder={'Enter the username'}/>
                 <div className=' text-[10px] relative' style={{color:'rgba(0, 0, 0, 0.78)'}}>
                   <p><ErrorOutlineIcon/>Please add your role after your name.</p>
                   <div className=' pl-5.5 relative bottom-1'><p>For example your name is abc and your role is uiux so your 

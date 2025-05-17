@@ -92,7 +92,7 @@ function Recover() {
   return (
     <Suspense>
         <div className=' flex w-full justify-center px-2'>
-            <div className={`mt-10  `} style={{width:large?'400px':'340px'}}>
+            <div className={`mt-10`} style={{width:large?'400px':'340px'}}>
               <div>
                 <div className=' flex justify-center'>
                     <div className=' flex flex-row gap-1.5 items-center'>
@@ -103,7 +103,7 @@ function Recover() {
                 <div className='overflow-x-hidden flex flex-row gap-3' style={{width:large?'400px':'340px'}}> 
                   <form onSubmit={(e) => handleSubmit(e)}  className='flex flex-col gap-3 ' style={{width:large?'400px':'340px'}}>
                       <p style={{width:large?'400px':'340px'}} className=' font-semibold text-[20px] text-center pt-16 pb-2.5'>Let's recover your password</p>
-                      <TkcInput placeholder={'Enter your email-id'} value={email} handleChange={setEmail}/>
+                      <TkcInput name='email' type='email' autocomplete='email' placeholder={'Enter your email-id'} value={email} handleChange={setEmail}/>
                       <div className=' flex justify-center'><button type='submit' className=' text-white font-semibold w-full p-2 rounded-md cursor-pointer' style={{backgroundColor:isValidateEmail(email)? (loading?'rgba(2, 72, 200, 0.14)':'rgba(7, 60, 160, 1)'):'rgba(2, 72, 200, 0.14)'}} disabled={!isValidateEmail(email)}>Continue</button></div>
                       {errlog &&  <p className = ' text-center text-red-600'>{errlog}</p>}
                   </form>
@@ -119,8 +119,8 @@ function Recover() {
                   </div>
                   <form onSubmit={handleFinish} ref={finishRef} className=' flex flex-col gap-2' style={{width:large?'400px':'340px'}}>
                     <p className=' mt-18' style={{width:large?'400px':'340px'}}></p>
-                    <TkcInput value={password} handleChange={setPassword} placeholder={'Enter your new password'} className={'w-full'}/>
-                    <TkcInput value={repassword} handleChange={setRePassword} placeholder={'Verify your new password'} className={'w-full'}/>
+                    <TkcInput name='password' type='password' autocomplete='password' value={password} handleChange={setPassword} placeholder={'Enter your new password'} className={'w-full'}/>
+                    <TkcInput name='password1' type='password' autocomplete='password1' value={repassword} handleChange={setRePassword} placeholder={'Verify your new password'} className={'w-full'}/>
                     <p style={{color:'rgba(0, 0, 0, 0.78)', fontSize:'11px'}}><ErrorOutlineIcon sx={{fontSize:20}}/>{' '}The password must contain at least six characters, a number, and a capital letter.</p>
                     <div className=' flex justify-center'><button type='submit' className=' text-white font-semibold w-full p-2 rounded-md cursor-pointer' style={{backgroundColor:password === repassword && isValidatePassword(password)? (loading1?'rgba(2, 72, 200, 0.14)':'rgba(7, 60, 160, 1)'):'rgba(2, 72, 200, 0.14)'}} disabled={(password !== repassword) && !isValidatePassword(password)}>Finish</button></div>
                   </form>
